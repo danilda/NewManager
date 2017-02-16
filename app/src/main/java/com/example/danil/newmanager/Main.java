@@ -80,16 +80,9 @@ public class Main extends AppCompatActivity {
         //Set title
         setTitle(listSliding.get(0).getTitle());
         //item selected
-        listViewSliding.setItemChecked(0, true);
+//        listViewSliding.setItemChecked(0, true);
         //Close menu
         drawerLayout.closeDrawer(listViewSliding);
-
-        //Display com.example.taskmg.fragment 1 when start
-        if(layoutResID.equals(MainActivity.class)){
-            replaceFragment(0);
-        } else if(layoutResID.equals(TasksActivity.class)){
-            replaceFragment(1);
-        }
 
         //Hanlde on item click
 
@@ -147,34 +140,7 @@ public class Main extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
     }
 
-    //Create method replace com.example.taskmg.fragment
 
-    private void replaceFragment(int pos) {
-        Log.d(logName, "replaceFragment начало :" + pos );
-        Fragment fragment = null;
-        switch (pos) {
-            case 0:
-                fragment = new Fragment1();
-                break;
-            case 1:
-                fragment = new Fragment2();
-                break;
-            case 2:
-                fragment = new Fragment3();
-                break;
-            default:
-                fragment = new Fragment1();
-                break;
-        }
-
-        if(null!=fragment) {
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.main_context, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
-    }
 
     public void newActivity(int position){
         Intent intent = null;
