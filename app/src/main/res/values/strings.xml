@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NewManager</string>
+    <string name="drawer_opened">open</string>
+    <string name="drawer_closed">close</string>
+</resources>
