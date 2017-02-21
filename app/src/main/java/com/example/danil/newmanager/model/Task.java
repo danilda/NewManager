@@ -1,6 +1,9 @@
 package com.example.danil.newmanager.model;
 
 import java.io.Serializable;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -18,6 +21,7 @@ public class Task implements Serializable {
     private GregorianCalendar startTime;
     private GregorianCalendar endTime;
     private int period;
+    private int imgID;
 
     public int getId() {
         return id;
@@ -75,6 +79,14 @@ public class Task implements Serializable {
         this.startTime = startTime;
     }
 
+    // TODO тут может быть ошибка
+    public void setStartTime(String startTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        ParsePosition pos = new ParsePosition(0);
+        this.startTime = new GregorianCalendar();
+        this.startTime.setTime(sdf.parse(startTime, pos));
+    }
+
     public GregorianCalendar getEndTime() {
         return endTime;
     }
@@ -91,7 +103,15 @@ public class Task implements Serializable {
         this.period = period;
     }
 
-    public Task(int id,String title, String description, boolean birthday, boolean important, boolean repeated, GregorianCalendar startTime, GregorianCalendar endTime, int period) {
+    public int getImgID() {
+        return imgID;
+    }
+
+    public void setImgID(int imgID) {
+        this.imgID = imgID;
+    }
+
+    public Task(int id, String title, String description, boolean birthday, boolean important, boolean repeated, GregorianCalendar startTime, GregorianCalendar endTime, int period, int imgID) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -116,6 +136,21 @@ public class Task implements Serializable {
         this.startTime = startTime;
         this.endTime = endTime;
         this.period = period;
+    }
+
+    //TODO проверить этот метот!
+    public GregorianCalendar getNextTime(){
+        if(!repeated){
+            return startTime;
+        } else {
+            GregorianCalendar tmp = startTime;
+            //прочекать значение больше-меньше
+            while(tmp.compareTo(endTime)< 1 ){
+                tmp.add(Calendar.HOUR , period);
+            }
+            return !(tmp.compareTo(endTime)< 1) ? null : tmp;
+        }
+
     }
 
 

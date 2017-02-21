@@ -68,6 +68,7 @@ public class DBActions {
             int startTimelIndex = c.getColumnIndex("startTime");
             int endTimeColIndex = c.getColumnIndex("endTime");
             int periodColIndex = c.getColumnIndex("period");
+            int imgIDColIndex = c.getColumnIndex("img_id");
             do {
                 int id = c.getInt(idColIndex);
                 String title = c.getString(titleColIndex);
@@ -84,12 +85,13 @@ public class DBActions {
                     if(repeated){
                         endTime =  new GregorianCalendar();
                         endTime.setTime((new SimpleDateFormat()).parse(c.getString(endTimeColIndex)));
-                        period = c.getInt(repeatedColIndex);
+                        period = c.getInt(periodColIndex);
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Task task = new Task(id, title, description, birthday, important, repeated, startTime, endTime, period);
+                int imgID = c.getInt(imgIDColIndex);
+                Task task = new Task(id, title, description, birthday, important, repeated, startTime, endTime, period, imgID);
                 list.add(task);
                 // получаем значения по номерам столбцов и пишем все в лог
                 Log.d(LOG_TAG,
@@ -101,7 +103,8 @@ public class DBActions {
                         ", repeated = " + repeated +
                         ", startTime = " + startTime +
                         ", endTime = " + endTime +
-                        ", period = " + period);
+                        ", period = " + period +
+                        ", img_id = " + imgID);
                 // переход на следующую строку
                 // а если следующей нет (текущая - последняя), то false - выходим из цикла
             } while (c.moveToNext());
@@ -132,7 +135,8 @@ public class DBActions {
                     + "repeated NUMERIC,"
                     + "startTime TEXT,"
                     + "endTime TEXT,"
-                    + "period NUMERIC"+ ");");
+                    + "period NUMERIC"
+                    + "img_id NUMERIC"+ ");");
         }
 
         @Override

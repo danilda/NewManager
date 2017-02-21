@@ -13,16 +13,27 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 
+
+import com.example.danil.newmanager.model.Task;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by danil on 12.02.2017.
  */
 
 public class Main extends AppCompatActivity {
+    private final static String logName = "log_Main";
+    final String ATTRIBUTE_NAME_ID_IMG = "id_img";
+    final String ATTRIBUTE_NAME_TITLE = "title";
+    final String ATTRIBUTE_NAME_DESCRIPTION = "description";
+    final String ATTRIBUTE_NAME_DATE = "date";
+
     private List<ItemSlideMenu> listSliding;
     private SlidingMenuAdapter adapter;
     private ListView listViewSliding;
@@ -30,7 +41,7 @@ public class Main extends AppCompatActivity {
     private RelativeLayout mainContent;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private static Class<?> layoutResID ;
-    private final static String logName = "log_Main";
+
 
     public static Class<?> getLayoutResID() {
         return layoutResID;
@@ -158,6 +169,40 @@ public class Main extends AppCompatActivity {
             startActivity(intent);
             this.finish();
         }
+    }
+
+    public void drawTasks(View into, ArrayList<Task> input){
+        String[] texts = { "sometext 1", "sometext 2", "sometext 3",
+                "sometext 4", "sometext 5" };
+        boolean[] checked = { true, false, false, true, false };
+
+        ArrayList<Map<String, Object>> data = new ArrayList<>(input.size());
+        Map<String, Object> map;
+        Task taskTmp;
+        for(int i = 0 ; i < input.size(); i++){
+            map = new HashMap<>();
+            taskTmp = input.get(i);
+            //TODO добавить картинку вместо id
+            map.put(ATTRIBUTE_NAME_ID_IMG, taskTmp.getImgID());
+            map.put(ATTRIBUTE_NAME_TITLE, taskTmp.getTitle());
+            map.put(ATTRIBUTE_NAME_DESCRIPTION, taskTmp.getDescription().substring(0, 200));
+            map.put(ATTRIBUTE_NAME_DATE, taskTmp.getNextTime());
+            data.add(map);
+        }
+
+
+
+        String[] from = { ATTRIBUTE_NAME_ID_IMG, ATTRIBUTE_NAME_TITLE,
+                ATTRIBUTE_NAME_DESCRIPTION, ATTRIBUTE_NAME_DATE};
+        int[] to = { R.id.tvText, R.id.cbChecked, R.id.ivImg };
+
+        // создаем адаптер
+        SimpleAdapter sAdapter = new SimpleAdapter(this, data, R.layout.item,
+                from, to);
+
+        // определяем список и присваиваем ему адаптер
+        lvSimple = (ListView) findViewById(R.id.lvSimple);
+        lvSimple.setAdapter(sAdapter);
     }
 
 }
