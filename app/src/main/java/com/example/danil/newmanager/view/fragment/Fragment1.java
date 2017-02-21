@@ -1,4 +1,4 @@
-package com.example.danil.newmanager.fragment;
+package com.example.danil.newmanager.view.fragment;
 
 /**
  * Created by danil on 11.02.2017.

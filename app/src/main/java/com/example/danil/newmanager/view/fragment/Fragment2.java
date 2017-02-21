@@ -1,4 +1,4 @@
-package com.example.danil.newmanager.fragment;
+package com.example.danil.newmanager.view.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;

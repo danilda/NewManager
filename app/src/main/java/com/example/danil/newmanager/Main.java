@@ -1,8 +1,5 @@
 package com.example.danil.newmanager;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,11 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-
-import com.example.danil.newmanager.fragment.Fragment1;
-import com.example.danil.newmanager.fragment.Fragment2;
-import com.example.danil.newmanager.fragment.Fragment3;
-import com.example.danil.newmanager.model.ItemSlideMenu;
 
 import java.util.ArrayList;
 import java.util.List;

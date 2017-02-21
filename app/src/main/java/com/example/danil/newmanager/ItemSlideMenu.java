@@ -1,4 +1,4 @@
-package com.example.danil.newmanager.model;
+package com.example.danil.newmanager;
 
 /**
  * Created by danil on 10.02.2017.

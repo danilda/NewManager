@@ -8,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.example.danil.newmanager.model.ItemSlideMenu;
-
 import java.util.List;
 
 /**

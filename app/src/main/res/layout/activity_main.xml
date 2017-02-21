@@ -18,7 +18,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:id="@+id/nearTasks">
 
                 <com.prolificinteractive.materialcalendarview.MaterialCalendarView
                     android:id="@+id/calendarView"
@@ -31,10 +32,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    android:text="This is fragment 1 sadsadasda
-            sdasdsadasdasdasdasdasdasdddddddddddddddddddddddddddd
-            dddddddddddddddddddddddddddddddddddddddddddddddd
-            ddddddddddddddddddddddddddddddddddddd"
+                    android:text="Ближайшие таски:"
                     android:textColor="#000000"
                     android:textSize="30dp"
                     android:layout_gravity="center"/>
