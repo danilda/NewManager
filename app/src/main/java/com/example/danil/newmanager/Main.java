@@ -171,10 +171,7 @@ public class Main extends AppCompatActivity {
         }
     }
 
-    public void drawTasks(View into, ArrayList<Task> input){
-        String[] texts = { "sometext 1", "sometext 2", "sometext 3",
-                "sometext 4", "sometext 5" };
-        boolean[] checked = { true, false, false, true, false };
+    public void drawTasks(ListView into, ArrayList<Task> input){
 
         ArrayList<Map<String, Object>> data = new ArrayList<>(input.size());
         Map<String, Object> map;
@@ -185,24 +182,21 @@ public class Main extends AppCompatActivity {
             //TODO добавить картинку вместо id
             map.put(ATTRIBUTE_NAME_ID_IMG, taskTmp.getImgID());
             map.put(ATTRIBUTE_NAME_TITLE, taskTmp.getTitle());
-            map.put(ATTRIBUTE_NAME_DESCRIPTION, taskTmp.getDescription().substring(0, 200));
+//            map.put(ATTRIBUTE_NAME_DESCRIPTION, taskTmp.getDescription().substring(0, 200));
             map.put(ATTRIBUTE_NAME_DATE, taskTmp.getNextTime());
             data.add(map);
         }
 
-
-
         String[] from = { ATTRIBUTE_NAME_ID_IMG, ATTRIBUTE_NAME_TITLE,
-                ATTRIBUTE_NAME_DESCRIPTION, ATTRIBUTE_NAME_DATE};
-        int[] to = { R.id.tvText, R.id.cbChecked, R.id.ivImg };
+                /*ATTRIBUTE_NAME_DESCRIPTION,*/ ATTRIBUTE_NAME_DATE};
+        int[] to = { R.id.item_img, R.id.item_title, R.id.item_date};
 
         // создаем адаптер
-        SimpleAdapter sAdapter = new SimpleAdapter(this, data, R.layout.item,
+        SimpleAdapter sAdapter = new SimpleAdapter(this, data, R.layout.task_item,
                 from, to);
 
         // определяем список и присваиваем ему адаптер
-        lvSimple = (ListView) findViewById(R.id.lvSimple);
-        lvSimple.setAdapter(sAdapter);
+        into.setAdapter(sAdapter);
     }
 
 }

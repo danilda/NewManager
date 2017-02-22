@@ -36,6 +36,12 @@
                     android:textColor="#000000"
                     android:textSize="30dp"
                     android:layout_gravity="center"/>
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/soon_tasks"
+                    android:background="#ffffff"
+                    android:choiceMode="singleChoice"></ListView>
 
             </LinearLayout>
         </ScrollView>

@@ -138,14 +138,19 @@ public class Task implements Serializable {
         this.period = period;
     }
 
-    //TODO проверить этот метот!
+    /**
+     * IMPORTANT
+     * months start with 1!
+     * */
     public GregorianCalendar getNextTime(){
         if(!repeated){
             return startTime;
         } else {
             GregorianCalendar tmp = startTime;
-            //прочекать значение больше-меньше
-            while(tmp.compareTo(endTime)< 1 ){
+            while(tmp.compareTo(endTime)< 1){
+                if(tmp.compareTo(new GregorianCalendar())>=0 ){
+                    break;
+                }
                 tmp.add(Calendar.HOUR , period);
             }
             return !(tmp.compareTo(endTime)< 1) ? null : tmp;
