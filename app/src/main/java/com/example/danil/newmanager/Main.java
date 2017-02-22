@@ -19,6 +19,7 @@ import android.widget.SimpleAdapter;
 import com.example.danil.newmanager.model.Task;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -182,6 +183,7 @@ public class Main extends AppCompatActivity {
             map.put(ATTRIBUTE_NAME_DATE, taskTmp.getNextTime());
             data.add(map);
         }
+        Log.d(logName, "data.size : " + data.size() );
 
         String[] from = { ATTRIBUTE_NAME_ID_IMG, ATTRIBUTE_NAME_TITLE,
                 /*ATTRIBUTE_NAME_DESCRIPTION,*/ ATTRIBUTE_NAME_DATE};
@@ -193,6 +195,8 @@ public class Main extends AppCompatActivity {
 
         // определяем список и присваиваем ему адаптер
         into.setAdapter(sAdapter);
+//        into.setDividerHeight(90*data.size());
+
     }
 
 }
