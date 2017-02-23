@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -171,6 +172,7 @@ public class Main extends AppCompatActivity {
     }
 
     public void drawTasks(ListView into, ArrayList<Task> input){
+
         SimpleDateFormat sdf = new SimpleDateFormat();
 
         ArrayList<Map<String, Object>> data = new ArrayList<>(input.size());
@@ -183,7 +185,7 @@ public class Main extends AppCompatActivity {
             map.put(ATTRIBUTE_NAME_ID_IMG, taskTmp.getImgID());
             map.put(ATTRIBUTE_NAME_TITLE, taskTmp.getTitle());
 //            map.put(ATTRIBUTE_NAME_DESCRIPTION, taskTmp.getDescription().substring(0, 200));
-            map.put(ATTRIBUTE_NAME_DATE, sdf.format(taskTmp.getNextTime()));
+            map.put(ATTRIBUTE_NAME_DATE, sdf.format(taskTmp.getNextTime().getTime()));
             data.add(map);
         }
         Log.d(logName, "data.size : " + data.size() );
@@ -197,14 +199,16 @@ public class Main extends AppCompatActivity {
                 from, to);
 
         // определяем список и присваиваем ему адаптер
+        ViewGroup.LayoutParams params = into.getLayoutParams();
+        params.height = (int)(90*data.size()* getResources().getDisplayMetrics().density);
+        into.setLayoutParams(params);
+        into.requestLayout();
         into.setAdapter(sAdapter);
-//        into.setDividerHeight(90*data.size());
 
     }
 
-
-    public void addTask(){
+    public void addTask() {
         Intent intent = new Intent(this, AddTasks.class);
+        startActivity(intent);
     }
-
 }

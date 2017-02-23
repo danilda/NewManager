@@ -37,6 +37,7 @@ public class MainActivity extends Main {
         arr.add(new Task("Го бегать", "Хочу не быть жирным", new GregorianCalendar()));
         arr.add(new Task("Го бегать", "Хочу не быть жирным", new GregorianCalendar()));
         Log.d(logName, "arr size = " + arr.size());
+
         drawTasks((ListView) findViewById(R.id.soon_tasks), arr);
         // массивы данных
 

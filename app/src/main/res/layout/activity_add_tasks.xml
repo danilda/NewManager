@@ -10,4 +10,28 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.danil.newmanager.AddTasks">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:text="Название Задачи"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/textView2" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:hint="до 50 символов"
+            android:id="@+id/editText"
+            android:textColor="#3e3ab7"
+            style="@style/Widget.AppCompat.Light.AutoCompleteTextView" />
+    </LinearLayout>
 </RelativeLayout>

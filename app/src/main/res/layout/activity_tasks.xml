@@ -7,7 +7,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/main_context"></RelativeLayout>
+        android:id="@+id/main_context">
+
+        <Button
+            android:text="Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="76dp"
+            android:id="@+id/button" />
+    </RelativeLayout>
     <ListView
         android:layout_width="300dp"
         android:layout_height="match_parent"
@@ -15,4 +25,6 @@
         android:background="#ffffff"
         android:choiceMode="singleChoice"
         android:layout_gravity="start"></ListView>
+
+
 </android.support.v4.widget.DrawerLayout>
