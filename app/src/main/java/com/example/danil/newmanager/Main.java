@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
@@ -18,6 +19,7 @@ import android.widget.SimpleAdapter;
 
 import com.example.danil.newmanager.model.Task;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -169,6 +171,7 @@ public class Main extends AppCompatActivity {
     }
 
     public void drawTasks(ListView into, ArrayList<Task> input){
+        SimpleDateFormat sdf = new SimpleDateFormat();
 
         ArrayList<Map<String, Object>> data = new ArrayList<>(input.size());
         Map<String, Object> map;
@@ -180,7 +183,7 @@ public class Main extends AppCompatActivity {
             map.put(ATTRIBUTE_NAME_ID_IMG, taskTmp.getImgID());
             map.put(ATTRIBUTE_NAME_TITLE, taskTmp.getTitle());
 //            map.put(ATTRIBUTE_NAME_DESCRIPTION, taskTmp.getDescription().substring(0, 200));
-            map.put(ATTRIBUTE_NAME_DATE, taskTmp.getNextTime());
+            map.put(ATTRIBUTE_NAME_DATE, sdf.format(taskTmp.getNextTime()));
             data.add(map);
         }
         Log.d(logName, "data.size : " + data.size() );
@@ -197,6 +200,11 @@ public class Main extends AppCompatActivity {
         into.setAdapter(sAdapter);
 //        into.setDividerHeight(90*data.size());
 
+    }
+
+
+    public void addTask(){
+        Intent intent = new Intent(this, AddTasks.class);
     }
 
 }
