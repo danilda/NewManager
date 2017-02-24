@@ -28,11 +28,13 @@ public class DBActions {
         db = dbHelper.getWritableDatabase();
     }
 
+    //TODO Написать Анумерацию с полями DB (подправить класс и статус(активынй/неактивный))
     public void insert(Task task){
         ContentValues cv = new ContentValues();
+        cv.put("active", task.isActive());
         cv.put("title", task.getTitle());
         cv.put("description", task.getDescription());
-        cv.put("birthday", task.isBirthday()?1:0);
+        cv.put("class", task.getTaskClass());
         cv.put("important", task.isImportant()?1:0);
         cv.put("repeated", task.isRepeated()?1:0);
         cv.put("startTime", (new SimpleDateFormat()).format(task.getStartTime()));
@@ -60,9 +62,10 @@ public class DBActions {
             list = new ArrayList<>();
             // определяем номера столбцов по имени в выборке
             int idColIndex = c.getColumnIndex("id");
+            int activeColIndex = c.getColumnIndex("id");
             int titleColIndex = c.getColumnIndex("title");
             int descriptionColIndex = c.getColumnIndex("description");
-            int birthdayIndex = c.getColumnIndex("birthday");
+            int taskClassColIndex = c.getColumnIndex("class");
             int importantColIndex = c.getColumnIndex("important");
             int repeatedColIndex = c.getColumnIndex("repeated");
             int startTimelIndex = c.getColumnIndex("startTime");
@@ -71,9 +74,10 @@ public class DBActions {
             int imgIDColIndex = c.getColumnIndex("img_id");
             do {
                 int id = c.getInt(idColIndex);
+                boolean active = (c.getInt(activeColIndex) == 1);
                 String title = c.getString(titleColIndex);
                 String description = c.getString(descriptionColIndex);
-                boolean birthday = (c.getInt(birthdayIndex) == 1);
+                String taskClass = c.getString(taskClassColIndex);
                 boolean important = (c.getInt(importantColIndex) == 1);
                 boolean repeated = (c.getInt(repeatedColIndex) == 1);
                 GregorianCalendar startTime = null;
@@ -91,14 +95,16 @@ public class DBActions {
                     e.printStackTrace();
                 }
                 int imgID = c.getInt(imgIDColIndex);
-                Task task = new Task(id, title, description, birthday, important, repeated, startTime, endTime, period, imgID);
+                Task task = new Task(id, title, description, taskClass, important, repeated, startTime, endTime, period, imgID);
+                task.setActive(active);
                 list.add(task);
                 // получаем значения по номерам столбцов и пишем все в лог
                 Log.d(LOG_TAG,
                         "ID = " + id +
+                        "active = " + active +
                         ", title = " + title +
                         ", description = " + description+
-                        ", birthday = " + birthday+
+                        ", class = " + taskClass+
                         ", important = " + important +
                         ", repeated = " + repeated +
                         ", startTime = " + startTime +
@@ -128,9 +134,10 @@ public class DBActions {
             // создаем таблицу с полями
             db.execSQL("create table TasksTable ("
                     + "id integer primary key autoincrement,"
+                    + "active,"
                     + "title text,"
                     + "description text,"
-                    + "birthday NUMERIC,"
+                    + "class TEXT,"
                     + "important NUMERIC,"
                     + "repeated NUMERIC,"
                     + "startTime TEXT,"

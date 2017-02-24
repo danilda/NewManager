@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -12,10 +11,12 @@ import java.util.GregorianCalendar;
  */
 
 public class Task implements Serializable {
+    // TODO добавить Активно/Неактивно
     private int id;
+    private boolean active;
     private String title;
     private String description;
-    private boolean birthday;
+    private String taskClass;
     private boolean important;
     private boolean repeated;
     private GregorianCalendar startTime;
@@ -29,6 +30,14 @@ public class Task implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getTitle() {
@@ -47,12 +56,12 @@ public class Task implements Serializable {
         this.description = description;
     }
 
-    public boolean isBirthday() {
-        return birthday;
+    public String getTaskClass() {
+        return taskClass;
     }
 
-    public void setBirthday(boolean birthday) {
-        this.birthday = birthday;
+    public void setTaskClass(String task_class) {
+        this.taskClass = task_class;
     }
 
     public boolean isImportant() {
@@ -111,11 +120,11 @@ public class Task implements Serializable {
         this.imgID = imgID;
     }
 
-    public Task(int id, String title, String description, boolean birthday, boolean important, boolean repeated, GregorianCalendar startTime, GregorianCalendar endTime, int period, int imgID) {
+    public Task(int id, String title, String description, String task_class , boolean important, boolean repeated, GregorianCalendar startTime, GregorianCalendar endTime, int period, int imgID) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.birthday = birthday;
+        this.taskClass = task_class;
         this.important = important;
         this.repeated = repeated;
         this.startTime = startTime;

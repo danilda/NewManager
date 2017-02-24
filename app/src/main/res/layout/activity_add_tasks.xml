@@ -27,11 +27,34 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:ems="10"
             android:hint="до 50 символов"
-            android:id="@+id/editText"
+            android:id="@+id/title"
             android:textColor="#3e3ab7"
             style="@style/Widget.AppCompat.Light.AutoCompleteTextView" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/description" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/task_class"></Spinner>
+        <android.support.v7.widget.SwitchCompat
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/important"/>
+        <android.support.v7.widget.SwitchCompat
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/repeated"/>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </GridLayout>
     </LinearLayout>
 </RelativeLayout>
