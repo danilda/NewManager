@@ -2,4 +2,11 @@
     <string name="app_name">NewManager</string>
     <string name="drawer_opened">open</string>
     <string name="drawer_closed">close</string>
+    <string-array name="planets_array">
+        <item>Обычное задача</item>
+        <item>День Рождения</item>
+        <item>Покупки</item>
+        <item>Ежедневное</item>
+        <item>Спорт</item>
+    </string-array>
 </resources>
