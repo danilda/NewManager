@@ -29,7 +29,7 @@ public class DBActions {
     }
 
     //TODO Написать Анумерацию с полями DB (подправить класс и статус(активынй/неактивный))
-    public void insert(Task task){
+    public long insert(Task task){
         ContentValues cv = new ContentValues();
         cv.put("active", task.isActive());
         cv.put("title", task.getTitle());
@@ -44,8 +44,9 @@ public class DBActions {
         }
         long rowID = db.insert("TasksTable", null, cv);
         Log.d(LOG_TAG, "row inserted, ID = " + rowID);
-
+        return rowID;
     }
+
     public void deleteAll(){
         int clearCount = db.delete("TasksTable", null, null);
         Log.d(LOG_TAG, "deleted rows count = " + clearCount);
