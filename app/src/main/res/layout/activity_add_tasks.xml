@@ -99,12 +99,19 @@
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="44dp">
+
             <TextView
-                android:text="Выбирите время начала задачи"
+                android:text="Выбирите время: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:id="@+id/start_hint" />
+            <TextView
+                android:text="начала задачи"
                 android:layout_width="match_parent"
                 android:textColor="#2f3e9e"
-                android:textAlignment="center"
                 android:paddingTop="15dp"
+                android:textAlignment="textEnd"
                 android:onClick="setTime"
                 android:paddingBottom="15dp"
                 android:layout_height="64dp"
@@ -115,10 +122,16 @@
             android:layout_width="match_parent"
             android:layout_height="44dp">
             <TextView
-                android:text="Выбирите время конца задачи"
+                android:text="Выбирите время: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:id="@+id/end_hint" />
+            <TextView
+                android:text="конца задачи"
                 android:layout_width="match_parent"
                 android:textColor="#2f3e9e"
-                android:textAlignment="center"
+                android:textAlignment="textEnd"
                 android:paddingTop="15dp"
                 android:onClick="setTime"
                 android:paddingBottom="15dp"
