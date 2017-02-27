@@ -202,7 +202,7 @@ public class Main extends AppCompatActivity {
         ViewGroup.LayoutParams params = into.getLayoutParams();
         params.height = (int)(90*data.size()* getResources().getDisplayMetrics().density);
         into.setLayoutParams(params);
-        into.requestLayout();
+//        into.requestLayout();
         into.setAdapter(sAdapter);
 
     }

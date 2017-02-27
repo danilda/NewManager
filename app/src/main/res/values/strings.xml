@@ -9,4 +9,6 @@
         <item>Ежедневное</item>
         <item>Спорт</item>
     </string-array>
+    <string name="choose_date">Выберите дату</string>
+    <string name="ready">Готово</string>
 </resources>
