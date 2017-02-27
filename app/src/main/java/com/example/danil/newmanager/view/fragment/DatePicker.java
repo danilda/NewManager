@@ -13,6 +13,7 @@ import android.support.v4.app.DialogFragment;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.danil.newmanager.AddTasks;
 import com.example.danil.newmanager.R;
 
 import java.util.Calendar;
@@ -22,6 +23,7 @@ public class DatePicker extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
     private GregorianCalendar date;
+    private AddTasks addTasks;
 
     public GregorianCalendar getDate() {
         return date;
@@ -30,6 +32,7 @@ public class DatePicker extends DialogFragment
     public void setDate(GregorianCalendar date) {
         this.date = date;
     }
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -59,9 +62,14 @@ public class DatePicker extends DialogFragment
     @Override
     public void onDateSet(android.widget.DatePicker datePicker, int year,
                           int month, int day) {
-        date = new GregorianCalendar(year, month, day, 0 , 0);
-        TextView tv = (TextView) getActivity().findViewById(R.id.start_time_hint);
-        tv.setText(day + "." + month + "." + year);
-
+        addTasks = (AddTasks) getActivity();
+        switch (addTasks.getCurrentView()){
+            case R.id.start_time_hint:
+                addTasks.setDate(addTasks.getStartTime(), year, month, day);
+                break;
+            case R.id.end_time_hint:
+                addTasks.setDate(addTasks.getEndTime(), year, month, day);
+                break;
+        }
     }
 }

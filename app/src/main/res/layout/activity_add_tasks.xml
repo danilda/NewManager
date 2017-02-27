@@ -101,20 +101,20 @@
             android:layout_height="44dp">
 
             <TextView
-                android:text="Выбирите время: "
+                android:text="Время начала: "
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textSize="20dp"
                 android:id="@+id/start_hint" />
+
             <TextView
                 android:text="начала задачи"
                 android:layout_width="match_parent"
                 android:textColor="#2f3e9e"
-                android:paddingTop="15dp"
-                android:textAlignment="textEnd"
+                android:layout_gravity="right"
                 android:onClick="setTime"
                 android:paddingBottom="15dp"
-                android:layout_height="64dp"
+                android:layout_height="match_parent"
                 android:textSize="20dp"
                 android:id="@+id/start_time_hint" />
         </GridLayout>
@@ -122,20 +122,19 @@
             android:layout_width="match_parent"
             android:layout_height="44dp">
             <TextView
-                android:text="Выбирите время: "
+                android:text="Время конца: "
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textSize="20dp"
                 android:id="@+id/end_hint" />
             <TextView
                 android:text="конца задачи"
                 android:layout_width="match_parent"
                 android:textColor="#2f3e9e"
-                android:textAlignment="textEnd"
-                android:paddingTop="15dp"
+                android:layout_gravity="right"
                 android:onClick="setTime"
                 android:paddingBottom="15dp"
-                android:layout_height="64dp"
+                android:layout_height="match_parent"
                 android:textSize="20dp"
                 android:id="@+id/end_time_hint" />
         </GridLayout>

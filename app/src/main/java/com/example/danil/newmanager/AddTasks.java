@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -19,6 +20,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class AddTasks extends AppCompatActivity {
+
+    private final static String logName = "log_Main";
     int DIALOG_DATE = 1;
     EditText title;
     EditText description;
@@ -28,6 +31,35 @@ public class AddTasks extends AppCompatActivity {
     TextView startTimeImg;
     GregorianCalendar startTime;
     GregorianCalendar endTime;
+    int currentView;
+
+    public int getCurrentView() {
+        return currentView;
+    }
+
+    public void setCurrentView(int currentView) {
+        this.currentView = currentView;
+    }
+
+    public GregorianCalendar getStartTime() {
+        if(startTime == null)
+            startTime = new GregorianCalendar();
+        return startTime;
+    }
+
+    public void setStartTime(GregorianCalendar startTime) {
+        this.startTime = startTime;
+    }
+
+    public GregorianCalendar getEndTime() {
+        if(endTime == null)
+            endTime = new GregorianCalendar();
+        return endTime;
+    }
+
+    public void setEndTime(GregorianCalendar endTime) {
+        this.endTime = endTime;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,34 +95,36 @@ public class AddTasks extends AppCompatActivity {
 
         DialogFragment timeDialog;
         DialogFragment dateDialog;
-        switch (view.getId()){
-            case R.id.start_time_hint :
-                timeDialog = new TimePicker();
-                timeDialog.show(getSupportFragmentManager(), "timePicker");
-                //*****
-                startTime = ((TimePicker)timeDialog).getTime();
-                dateDialog = new DatePicker();
-                dateDialog.show(getSupportFragmentManager(), "datePicker");
-                //*****
-                startTime.set(Calendar.YEAR, ((DatePicker)dateDialog).getDate().get(Calendar.YEAR));
-                startTime.set(Calendar.MONTH, ((DatePicker)dateDialog).getDate().get(Calendar.MONTH));
-                startTime.set(Calendar.DAY_OF_MONTH, ((DatePicker)dateDialog).getDate().get(Calendar.DAY_OF_MONTH));
-                break;
-            case R.id.end_time_hint :
-                timeDialog = new TimePicker();
-                timeDialog.show(getSupportFragmentManager(), "timePicker");
-                //*****
-                endTime = ((TimePicker)timeDialog).getTime();
-                dateDialog = new DatePicker();
-                dateDialog.show(getSupportFragmentManager(), "datePicker");
-                //*****
-                endTime.set(Calendar.YEAR, ((DatePicker)dateDialog).getDate().get(Calendar.YEAR));
-                endTime.set(Calendar.MONTH, ((DatePicker)dateDialog).getDate().get(Calendar.MONTH));
-                endTime.set(Calendar.DAY_OF_MONTH, ((DatePicker)dateDialog).getDate().get(Calendar.DAY_OF_MONTH));
-                break;
-        }
+        currentView = view.getId();
 
-
+        timeDialog = new TimePicker();
+        timeDialog.show(getSupportFragmentManager(), "timePicker");
+        dateDialog = new DatePicker();
+        dateDialog.show(getSupportFragmentManager(), "datePicker");
     }
+
+    public void setDate(GregorianCalendar date, int year, int month, int day){
+        date.set(Calendar.YEAR, year);
+        date.set(Calendar.MONTH, month);
+        date.set(Calendar.DAY_OF_MONTH, day);
+    }
+    public void setTime(GregorianCalendar time, int hour, int min){
+        time.set(Calendar.HOUR_OF_DAY , hour);
+        time.set(Calendar.MINUTE , min);
+    }
+    public void showDate(GregorianCalendar time, int id){
+        StringBuilder sb = new StringBuilder();
+        sb.append(time.get(Calendar.DAY_OF_MONTH)<10?"0" + time.get(Calendar.DAY_OF_MONTH):time.get(Calendar.DAY_OF_MONTH));
+        sb.append(".");
+        sb.append(time.get(Calendar.MONTH)<10?"0" + time.get(Calendar.MONTH):time.get(Calendar.MONTH));
+        sb.append(".");
+        sb.append(time.get(Calendar.YEAR));
+        sb.append(" ");
+        sb.append(time.get(Calendar.HOUR_OF_DAY));
+        sb.append(":");
+        sb.append((int)time.get(Calendar.MINUTE)<10?"0" + time.get(Calendar.MINUTE):time.get(Calendar.MINUTE));
+        ((TextView)findViewById(id)).setText(sb.toString());
+    }
+
 
 }
