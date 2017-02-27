@@ -16,9 +16,20 @@ import android.widget.TextView;
 import com.example.danil.newmanager.R;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class DatePicker extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
+
+    private GregorianCalendar date;
+
+    public GregorianCalendar getDate() {
+        return date;
+    }
+
+    public void setDate(GregorianCalendar date) {
+        this.date = date;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -48,6 +59,7 @@ public class DatePicker extends DialogFragment
     @Override
     public void onDateSet(android.widget.DatePicker datePicker, int year,
                           int month, int day) {
+        date = new GregorianCalendar(year, month, day, 0 , 0);
         TextView tv = (TextView) getActivity().findViewById(R.id.start_time_hint);
         tv.setText(day + "." + month + "." + year);
 

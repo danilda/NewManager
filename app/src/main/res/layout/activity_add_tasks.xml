@@ -105,11 +105,26 @@
                 android:textColor="#2f3e9e"
                 android:textAlignment="center"
                 android:paddingTop="15dp"
-                android:onClick="setStartTime"
+                android:onClick="setTime"
                 android:paddingBottom="15dp"
                 android:layout_height="64dp"
                 android:textSize="20dp"
                 android:id="@+id/start_time_hint" />
+        </GridLayout>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+            <TextView
+                android:text="Выбирите время конца задачи"
+                android:layout_width="match_parent"
+                android:textColor="#2f3e9e"
+                android:textAlignment="center"
+                android:paddingTop="15dp"
+                android:onClick="setTime"
+                android:paddingBottom="15dp"
+                android:layout_height="64dp"
+                android:textSize="20dp"
+                android:id="@+id/end_time_hint" />
         </GridLayout>
 
     </LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import com.example.danil.newmanager.R;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Created by danil on 26.02.2017.
@@ -20,6 +21,17 @@ import java.util.Calendar;
 
 public class TimePicker extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener{
+
+    GregorianCalendar time;
+
+    public GregorianCalendar getTime() {
+        return time;
+    }
+
+    public void setTime(GregorianCalendar time) {
+        this.time = time;
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -39,7 +51,10 @@ public class TimePicker extends DialogFragment
 
     @Override
     public void onTimeSet(android.widget.TimePicker view, int hourOfDay, int minute) {
+        time = new GregorianCalendar();
+        time.set(1, 1, 1, hourOfDay, minute);
         TextView tv = (TextView) getActivity().findViewById(R.id.start_time_hint);
         tv.setText(tv.getText().toString() + " "+ hourOfDay + ":" + (minute==0?"00":minute) );
+
     }
 }
