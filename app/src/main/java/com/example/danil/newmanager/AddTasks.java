@@ -25,6 +25,7 @@ public class AddTasks extends AppCompatActivity {
         description = (EditText) findViewById(R.id.description);
         taskClass = (Spinner) findViewById(R.id.task_class);
         important = (SwitchCompat) findViewById(R.id.important);
+
         repeated = (SwitchCompat) findViewById(R.id.repeated);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.planets_array, android.R.layout.simple_spinner_item);
