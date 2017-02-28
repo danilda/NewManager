@@ -9,135 +9,246 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:isScrollContainer="true"
     tools:context="com.example.danil.newmanager.AddTasks">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:weightSum="1"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-
-        <TextView
-            android:text="Название Задачи"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:id="@+id/title_hint" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textAlignment="textStart"
-            android:hint="до 50 символов"
-            android:id="@+id/title"
-            android:textColor="#3e3ab7"
-            style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
-            android:inputType="textMultiLine" />
-        <TextView
-            android:text="Описание задачи"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:id="@+id/description_hint" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/description" />
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-            <TextView
-                android:text="Тип"
-                app:layout_widthPercent="40%"
-                android:layout_height="40dp"
-                android:textSize="20dp"
-                android:id="@+id/class_task_hint" />
-            <Spinner
-                app:layout_widthPercent="100%"
-                android:textAlignment="center"
-                android:layout_height="40dp"
-                android:layout_gravity="right"
-                android:id="@+id/task_class"></Spinner>
-        </GridLayout>
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-            <TextView
-                android:text="Важное"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:id="@+id/important_hint" />
-            <android.support.v7.widget.SwitchCompat
-                android:layout_width="70dp"
-                app:switchMinWidth="70dp"
-                android:layout_gravity="right"
-                android:layout_height="wrap_content"
-                android:id="@+id/important"/>
-        </GridLayout>
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-            <TextView
-                android:text="Повторяемое"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:id="@+id/repeated_hint" />
-            <android.support.v7.widget.SwitchCompat
-                android:layout_width="70dp"
-                app:switchMinWidth="70dp"
-                android:layout_gravity="right"
-                android:layout_height="wrap_content"
-                android:id="@+id/repeated"/>
-        </GridLayout>
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="44dp">
+            android:layout_height="match_parent"
+            android:weightSum="1"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
 
             <TextView
-                android:text="Время начала: "
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="20dp"
-                android:id="@+id/start_hint" />
-
-            <TextView
-                android:text="начала задачи"
+                android:text="Название Задачи"
                 android:layout_width="match_parent"
-                android:textColor="#2f3e9e"
-                android:layout_gravity="right"
-                android:onClick="setTime"
-                android:paddingBottom="15dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:id="@+id/start_time_hint" />
-        </GridLayout>
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="44dp">
-            <TextView
-                android:text="Время конца: "
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="20dp"
-                android:id="@+id/end_hint" />
-            <TextView
-                android:text="конца задачи"
-                android:layout_width="match_parent"
-                android:textColor="#2f3e9e"
-                android:layout_gravity="right"
-                android:onClick="setTime"
-                android:paddingBottom="15dp"
-                android:layout_height="match_parent"
-                android:textSize="20dp"
-                android:id="@+id/end_time_hint" />
-        </GridLayout>
+                android:id="@+id/title_hint" />
 
-    </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textAlignment="textStart"
+                android:hint="до 50 символов"
+                android:id="@+id/title"
+                android:textColor="#3e3ab7"
+                style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
+                android:inputType="textMultiLine" />
+            <TextView
+                android:text="Описание задачи"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:id="@+id/description_hint" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/description" />
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <TextView
+                    android:text="Тип"
+                    app:layout_widthPercent="40%"
+                    android:layout_height="40dp"
+                    android:textSize="20dp"
+                    android:id="@+id/class_task_hint" />
+                <Spinner
+                    app:layout_widthPercent="100%"
+                    android:textAlignment="center"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right"
+                    android:id="@+id/task_class"></Spinner>
+            </GridLayout>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <TextView
+                    android:text="Важное"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:id="@+id/important_hint" />
+                <android.support.v7.widget.SwitchCompat
+                    android:layout_width="70dp"
+                    app:switchMinWidth="70dp"
+                    android:layout_gravity="right"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/important"/>
+            </GridLayout>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <TextView
+                    android:text="Повторяемое"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:id="@+id/repeated_hint" />
+                <android.support.v7.widget.SwitchCompat
+                    android:layout_width="70dp"
+                    app:switchMinWidth="70dp"
+                    android:layout_gravity="right"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/repeated"/>
+            </GridLayout>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <TextView
+                    android:text="Безсрочное повторение"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:id="@+id/full_repeated_hint" />
+                <android.support.v7.widget.SwitchCompat
+                    android:layout_width="70dp"
+                    app:switchMinWidth="70dp"
+                    android:layout_gravity="right"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/full_repeated"/>
+            </GridLayout>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <TextView
+                    android:text="Тип повторения"
+                    app:layout_widthPercent="40%"
+                    android:layout_height="40dp"
+                    android:textSize="20dp"
+                    android:id="@+id/period_hint" />
+                <Spinner
+                    app:layout_widthPercent="100%"
+                    android:textAlignment="center"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right"
+                    android:id="@+id/task_period"></Spinner>
+            </GridLayout>
+
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+                <TextView
+                    android:text="Пн"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:text="Вт"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:text="Ср"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:text="Чт"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:text="Пт"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:text="Сб"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:text="Вс"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="20dp"/>
+
+            </GridLayout>
+
+
+
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp">
+
+                <TextView
+                    android:text="Время начала: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="20dp"
+                    android:id="@+id/start_hint" />
+
+                <TextView
+                    android:text="начала задачи"
+                    android:layout_width="match_parent"
+                    android:textColor="#2f3e9e"
+                    android:layout_gravity="right"
+                    android:onClick="setTime"
+                    android:paddingBottom="15dp"
+                    android:layout_height="match_parent"
+                    android:textSize="20dp"
+                    android:id="@+id/start_time_hint" />
+            </GridLayout>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp">
+                <TextView
+                    android:text="Время конца: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="20dp"
+                    android:id="@+id/end_hint" />
+                <TextView
+                    android:text="конца задачи"
+                    android:layout_width="match_parent"
+                    android:textColor="#2f3e9e"
+                    android:layout_gravity="right"
+                    android:onClick="setTime"
+                    android:paddingBottom="15dp"
+                    android:layout_height="match_parent"
+                    android:textSize="20dp"
+                    android:id="@+id/end_time_hint" />
+            </GridLayout>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <TextView
+                    android:text="Перииод выполнения в часах"
+                    app:layout_widthPercent="40%"
+                    android:layout_height="40dp"
+                    android:textSize="20dp"
+                    android:id="@+id/period_hour_hint" />
+                <Spinner
+                    app:layout_widthPercent="100%"
+                    android:textAlignment="center"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right"
+                    android:id="@+id/task_period_hour"></Spinner>
+            </GridLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

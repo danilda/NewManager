@@ -26,6 +26,8 @@ public class AddTasks extends AppCompatActivity {
     EditText title;
     EditText description;
     Spinner taskClass;
+    Spinner taskPeriod;
+    Spinner taskPeriodHour;
     SwitchCompat important;
     SwitchCompat repeated;
     TextView startTimeImg;
@@ -69,21 +71,34 @@ public class AddTasks extends AppCompatActivity {
         description = (EditText) findViewById(R.id.description);
         taskClass = (Spinner) findViewById(R.id.task_class);
         important = (SwitchCompat) findViewById(R.id.important);
+        taskPeriod = (Spinner) findViewById(R.id.task_period);
+        taskPeriodHour = (Spinner) findViewById(R.id.task_period_hour);
 
         repeated = (SwitchCompat) findViewById(R.id.repeated);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
+                R.array.tasks_class_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         taskClass.setAdapter(adapter);
         startTimeImg = (TextView) findViewById(R.id.start_time_hint);
+
+        ArrayAdapter<CharSequence> adapterPeriod = ArrayAdapter.createFromResource(this,
+                R.array.period_array, android.R.layout.simple_spinner_item);
+        taskPeriod.setAdapter(adapterPeriod);
+
+        ArrayAdapter<CharSequence> adapterPeriodHour = ArrayAdapter.createFromResource(this,
+                R.array.period_hour_array, android.R.layout.simple_spinner_item);
+        taskPeriodHour.setAdapter(adapterPeriodHour);
     }
 
     // TODO добавить класс задач будильник
     public boolean validation(){
         throw new RuntimeException();
     }
+
+
+    //TODO добавить фильтрый по классам задач
 
 
     //TODO сделать повторяющиеся задачи без временных рамок и по дням недели;
