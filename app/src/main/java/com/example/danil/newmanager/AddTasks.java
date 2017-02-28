@@ -18,6 +18,8 @@ import com.example.danil.newmanager.view.fragment.TimePicker;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddTasks extends AppCompatActivity {
 
@@ -34,6 +36,7 @@ public class AddTasks extends AppCompatActivity {
     GregorianCalendar startTime;
     GregorianCalendar endTime;
     int currentView;
+    Map<Integer, Boolean> weekDays;
 
     public int getCurrentView() {
         return currentView;
@@ -140,6 +143,31 @@ public class AddTasks extends AppCompatActivity {
         sb.append(":");
         sb.append((int)time.get(Calendar.MINUTE)<10?"0" + time.get(Calendar.MINUTE):time.get(Calendar.MINUTE));
         ((TextView)findViewById(id)).setText(sb.toString());
+    }
+
+    public void weekDaysClick(View view){
+        if(weekDays == null){
+            weekDays = new HashMap<>();
+            weekDays.put(R.id.day_1, false);
+            weekDays.put(R.id.day_2, false);
+            weekDays.put(R.id.day_3, false);
+            weekDays.put(R.id.day_4, false);
+            weekDays.put(R.id.day_5, false);
+            weekDays.put(R.id.day_6, false);
+            weekDays.put(R.id.day_7, false);
+        }
+
+        TextView tx = (TextView) view;
+        Log.d(logName, "Значение мапы на входе" + weekDays.get(view.getId()));
+        if(weekDays.get(view.getId())){
+            tx.setTextColor(getResources().getColor(R.color.black));
+            tx.setBackgroundColor(getResources().getColor(R.color.white));
+            weekDays.put(view.getId(), false);
+        } else {
+            tx.setTextColor(getResources().getColor(R.color.white));
+            tx.setBackgroundColor(getResources().getColor(R.color.days));
+            weekDays.put(view.getId(), true);
+        }
     }
 
 

@@ -5,10 +5,6 @@
     android:id="@+id/activity_add_tasks"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:isScrollContainer="true"
     tools:context="com.example.danil.newmanager.AddTasks">
 
@@ -17,12 +13,16 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+
         android:layout_alignParentEnd="true">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:weightSum="1"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true">
 
@@ -153,60 +153,95 @@
             </GridLayout>
 
 
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
                 <TextView
                     android:text="Пн"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:id="@+id/day_1"
+                    android:onClick="weekDaysClick"
+                    android:background="@color/white"
                     android:textSize="20dp"/>
                 <TextView
                     android:text="Вт"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:id="@+id/day_2"
+                    android:onClick="weekDaysClick"
+                    android:background="@color/white"
                     android:textSize="20dp"/>
                 <TextView
                     android:text="Ср"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:id="@+id/day_3"
+                    android:onClick="weekDaysClick"
+                    android:background="@color/white"
                     android:textSize="20dp"/>
                 <TextView
                     android:text="Чт"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:id="@+id/day_4"
+                    android:onClick="weekDaysClick"
+                    android:background="@color/white"
                     android:textSize="20dp"/>
                 <TextView
                     android:text="Пт"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:id="@+id/day_5"
+                    android:onClick="weekDaysClick"
+                    android:background="@color/white"
                     android:textSize="20dp"/>
                 <TextView
                     android:text="Сб"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:id="@+id/day_6"
+                    android:onClick="weekDaysClick"
+                    android:background="@color/white"
                     android:textSize="20dp"/>
                 <TextView
                     android:text="Вс"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:id="@+id/day_7"
+                    android:onClick="weekDaysClick"
+                    android:background="@color/white"
                     android:textSize="20dp"/>
 
-            </GridLayout>
+            </LinearLayout>
 
 
 
 
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp">
 
@@ -226,9 +261,10 @@
                     android:paddingBottom="15dp"
                     android:layout_height="match_parent"
                     android:textSize="20dp"
+                    android:gravity="end"
                     android:id="@+id/start_time_hint" />
-            </GridLayout>
-            <GridLayout
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp">
                 <TextView
@@ -241,18 +277,18 @@
                     android:text="конца задачи"
                     android:layout_width="match_parent"
                     android:textColor="#2f3e9e"
-                    android:layout_gravity="right"
+                    android:gravity="end"
                     android:onClick="setTime"
                     android:paddingBottom="15dp"
                     android:layout_height="match_parent"
                     android:textSize="20dp"
                     android:id="@+id/end_time_hint" />
-            </GridLayout>
+            </LinearLayout>
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp">
                 <TextView
-                    android:text="Перииод выполнения в часах"
+                    android:text="Период выполнения в часах"
                     app:layout_widthPercent="40%"
                     android:layout_height="40dp"
                     android:textSize="20dp"
