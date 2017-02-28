@@ -106,6 +106,7 @@ public class AddTasks extends AppCompatActivity {
     //TODO одинаковый промежуток времени(а тут подумать, что бы каждый день, но с 9 и до 21 с одинаковым временным промежутком)
     //TODO
     //TODO подправить внешний вид установки даты
+    //TODO добавить в БД УВЕДОМЛЕНИЕ!!!!звуковое!!!
     public void setTime(View view) {
 
         DialogFragment timeDialog;

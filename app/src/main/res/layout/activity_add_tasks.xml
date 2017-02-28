@@ -91,6 +91,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp">
                 <TextView
+                    android:text="Увидомление"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:id="@+id/notifi_hint" />
+                <android.support.v7.widget.SwitchCompat
+                    android:layout_width="70dp"
+                    app:switchMinWidth="70dp"
+                    android:layout_gravity="right"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/notifi"/>
+            </GridLayout>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <TextView
                     android:text="Повторяемое"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
