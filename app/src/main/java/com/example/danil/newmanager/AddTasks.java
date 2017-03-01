@@ -2,6 +2,7 @@ package com.example.danil.newmanager;
 
 
 
+import android.app.ActionBar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -148,12 +150,12 @@ public class AddTasks extends AppCompatActivity {
         TextView tmp;
 
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
-                wrapContent, wrapContent);
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         for(int i = 0; i < 7; i++){
             tmp = new TextView(this);
             tmp.setText(week[i]);
             tmp.setGravity(Gravity.CENTER);
-            view.addView( ,lParams);
+            view.addView(,lParams);
         }
 
     }
