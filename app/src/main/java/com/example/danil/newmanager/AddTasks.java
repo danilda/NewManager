@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -28,23 +30,14 @@ public class AddTasks extends AppCompatActivity {
     EditText title;
     EditText description;
     Spinner taskClass;
-    Spinner taskPeriod;
-    Spinner taskPeriodHour;
+    Spinner taskClassRepeat;
     SwitchCompat important;
     SwitchCompat repeated;
     TextView startTimeImg;
     GregorianCalendar startTime;
-    GregorianCalendar endTime;
-    int currentView;
-    Map<Integer, Boolean> weekDays;
+    Map<Integer, Boolean> days;
+    LinearLayout weekMonthYear;
 
-    public int getCurrentView() {
-        return currentView;
-    }
-
-    public void setCurrentView(int currentView) {
-        this.currentView = currentView;
-    }
 
     public GregorianCalendar getStartTime() {
         if(startTime == null)
@@ -56,15 +49,6 @@ public class AddTasks extends AppCompatActivity {
         this.startTime = startTime;
     }
 
-    public GregorianCalendar getEndTime() {
-        if(endTime == null)
-            endTime = new GregorianCalendar();
-        return endTime;
-    }
-
-    public void setEndTime(GregorianCalendar endTime) {
-        this.endTime = endTime;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,26 +57,24 @@ public class AddTasks extends AppCompatActivity {
         title = (EditText) findViewById(R.id.title);
         description = (EditText) findViewById(R.id.description);
         taskClass = (Spinner) findViewById(R.id.task_class);
+        taskClassRepeat = (Spinner) findViewById(R.id.task_class);
         important = (SwitchCompat) findViewById(R.id.important);
-        taskPeriod = (Spinner) findViewById(R.id.task_period);
-        taskPeriodHour = (Spinner) findViewById(R.id.task_period_hour);
-
         repeated = (SwitchCompat) findViewById(R.id.repeated);
+        startTimeImg = (TextView) findViewById(R.id.start_time_hint);
+        weekMonthYear = (LinearLayout) findViewById(R.id.week_month_year);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.tasks_class_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         taskClass.setAdapter(adapter);
-        startTimeImg = (TextView) findViewById(R.id.start_time_hint);
 
-        ArrayAdapter<CharSequence> adapterPeriod = ArrayAdapter.createFromResource(this,
+
+
+        ArrayAdapter<CharSequence> adapterClassRepeat = ArrayAdapter.createFromResource(this,
                 R.array.period_array, android.R.layout.simple_spinner_item);
-        taskPeriod.setAdapter(adapterPeriod);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        taskClassRepeat.setAdapter(adapterClassRepeat);
 
-        ArrayAdapter<CharSequence> adapterPeriodHour = ArrayAdapter.createFromResource(this,
-                R.array.period_hour_array, android.R.layout.simple_spinner_item);
-        taskPeriodHour.setAdapter(adapterPeriodHour);
     }
 
     // TODO добавить класс задач будильник
@@ -102,20 +84,11 @@ public class AddTasks extends AppCompatActivity {
 
 
     //TODO добавить фильтрый по классам задач
-
-
-    //TODO сделать повторяющиеся задачи без временных рамок и по дням недели;
-    //TODO можно добавить еще один список выбора как для класса задач в котором будет повторяется по дням недели, ежедневно,
-    //TODO одинаковый промежуток времени(а тут подумать, что бы каждый день, но с 9 и до 21 с одинаковым временным промежутком)
     //TODO
-    //TODO подправить внешний вид установки даты
     //TODO добавить в БД УВЕДОМЛЕНИЕ!!!!звуковое!!!
     public void setTime(View view) {
-
         DialogFragment timeDialog;
         DialogFragment dateDialog;
-        currentView = view.getId();
-
         timeDialog = new TimePicker();
         timeDialog.show(getSupportFragmentManager(), "timePicker");
         dateDialog = new DatePicker();
@@ -146,29 +119,49 @@ public class AddTasks extends AppCompatActivity {
     }
 
     public void weekDaysClick(View view){
-        if(weekDays == null){
-            weekDays = new HashMap<>();
-            weekDays.put(R.id.day_1, false);
-            weekDays.put(R.id.day_2, false);
-            weekDays.put(R.id.day_3, false);
-            weekDays.put(R.id.day_4, false);
-            weekDays.put(R.id.day_5, false);
-            weekDays.put(R.id.day_6, false);
-            weekDays.put(R.id.day_7, false);
+        if(days == null){
+            days = new HashMap<>();
+            days.put(R.id.day_1, false);
+            days.put(R.id.day_2, false);
+            days.put(R.id.day_3, false);
+            days.put(R.id.day_4, false);
+            days.put(R.id.day_5, false);
+            days.put(R.id.day_6, false);
+            days.put(R.id.day_7, false);
         }
 
         TextView tx = (TextView) view;
-        Log.d(logName, "Значение мапы на входе" + weekDays.get(view.getId()));
-        if(weekDays.get(view.getId())){
+        Log.d(logName, "Значение мапы на входе" + days.get(view.getId()));
+        if(days.get(view.getId())){
             tx.setTextColor(getResources().getColor(R.color.black));
             tx.setBackgroundColor(getResources().getColor(R.color.white));
-            weekDays.put(view.getId(), false);
+            days.put(view.getId(), false);
         } else {
             tx.setTextColor(getResources().getColor(R.color.white));
             tx.setBackgroundColor(getResources().getColor(R.color.days));
-            weekDays.put(view.getId(), true);
+            days.put(view.getId(), true);
         }
     }
+
+    public void drawWeek(LinearLayout view){
+        String[] week = {"Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"};
+        TextView tmp;
+
+        LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
+                wrapContent, wrapContent);
+        for(int i = 0; i < 7; i++){
+            tmp = new TextView(this);
+            tmp.setText(week[i]);
+            tmp.setGravity(Gravity.CENTER);
+            view.addView( ,lParams);
+        }
+
+    }
+
+    public void drawMonth(View view){
+        
+    }
+
 
 
 }

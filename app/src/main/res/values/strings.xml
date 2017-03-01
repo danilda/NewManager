@@ -6,29 +6,13 @@
         <item>Обычное задача</item>
         <item>День Рождения</item>
         <item>Покупки</item>
-        <item>Ежедневное</item>
-        <item>Еженедельное</item>
         <item>Спорт</item>
         <item>Будильник</item>
     </string-array>
     <string-array name="period_array">
-        <item>По дням недели</item>
-        <item>Ежедневно</item>
-        <item>Повторяющиеся втечение дня</item>
-    </string-array>
-    <string-array name="period_hour_array">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
+        <item>В рамках недели</item>
+        <item>В рамках месяца</item>
+        <item>В рамках года</item>
     </string-array>
     <string name="choose_date">Выберите дату</string>
     <string name="ready">Готово</string>
