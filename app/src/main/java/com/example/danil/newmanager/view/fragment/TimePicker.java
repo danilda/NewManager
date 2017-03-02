@@ -55,16 +55,7 @@ public class TimePicker extends DialogFragment
     @Override
     public void onTimeSet(android.widget.TimePicker view, int hourOfDay, int minute) {
         addTasks = (AddTasks) getActivity();
-        switch (addTasks.getCurrentView()){
-            case R.id.start_time_hint:
-                addTasks.setTime(addTasks.getStartTime(), hourOfDay, minute);
-                addTasks.showDate(addTasks.getStartTime(), R.id.start_time_hint);
-                break;
-            case R.id.end_time_hint:
-                addTasks.setTime(addTasks.getEndTime(), hourOfDay, minute);
-                addTasks.showDate(addTasks.getEndTime(), R.id.end_time_hint);
-                break;
-        }
-
+        addTasks.setTime(addTasks.getStartTime(), hourOfDay, minute);
+        addTasks.showDate(addTasks.getStartTime(), R.id.start_time_hint);
     }
 }

@@ -63,13 +63,6 @@ public class DatePicker extends DialogFragment
     public void onDateSet(android.widget.DatePicker datePicker, int year,
                           int month, int day) {
         addTasks = (AddTasks) getActivity();
-        switch (addTasks.getCurrentView()){
-            case R.id.start_time_hint:
-                addTasks.setDate(addTasks.getStartTime(), year, month, day);
-                break;
-            case R.id.end_time_hint:
-                addTasks.setDate(addTasks.getEndTime(), year, month, day);
-                break;
-        }
+        addTasks.setDate(addTasks.getStartTime(), year, month, day);
     }
 }

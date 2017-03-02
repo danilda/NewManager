@@ -38,6 +38,7 @@ public class AddTasks extends AppCompatActivity {
     TextView startTimeImg;
     GregorianCalendar startTime;
     Map<Integer, Boolean> days;
+    int[] daysId;
     LinearLayout weekMonthYear;
 
 
@@ -119,17 +120,16 @@ public class AddTasks extends AppCompatActivity {
         sb.append((int)time.get(Calendar.MINUTE)<10?"0" + time.get(Calendar.MINUTE):time.get(Calendar.MINUTE));
         ((TextView)findViewById(id)).setText(sb.toString());
     }
-
     public void weekDaysClick(View view){
         if(days == null){
             days = new HashMap<>();
-            days.put(R.id.day_1, false);
-            days.put(R.id.day_2, false);
-            days.put(R.id.day_3, false);
-            days.put(R.id.day_4, false);
-            days.put(R.id.day_5, false);
-            days.put(R.id.day_6, false);
-            days.put(R.id.day_7, false);
+            days.put(daysId[0], false);
+            days.put(daysId[1], false);
+            days.put(daysId[2], false);
+            days.put(daysId[3], false);
+            days.put(daysId[4], false);
+            days.put(daysId[5], false);
+            days.put(daysId[6], false);
         }
 
         TextView tx = (TextView) view;
@@ -145,7 +145,9 @@ public class AddTasks extends AppCompatActivity {
         }
     }
 
+
     public void drawWeek(LinearLayout view){
+        daysId = new int[7];
         String[] week = {"Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"};
         TextView tmp;
 
@@ -155,7 +157,20 @@ public class AddTasks extends AppCompatActivity {
             tmp = new TextView(this);
             tmp.setText(week[i]);
             tmp.setGravity(Gravity.CENTER);
-            view.addView(,lParams);
+            daysId[i] = View.generateViewId();
+            tmp.setId(daysId[i]);
+            tmp.getLayoutParams().height = tmp.getLayoutParams().MATCH_PARENT;
+            tmp.getLayoutParams().width = tmp.getLayoutParams().WRAP_CONTENT;
+            tmp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    weekDaysClick(v);
+                }
+            });
+            tmp.setTextColor(getResources().getColor(R.color.black));
+            tmp.setBackgroundColor(getResources().getColor(R.color.white));
+            ((LinearLayout.LayoutParams) tmp.getLayoutParams()).weight = 1;
+            view.addView(tmp,lParams);
         }
 
     }
