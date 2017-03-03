@@ -77,6 +77,7 @@ public class AddTasks extends AppCompatActivity {
                 R.array.period_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         taskClassRepeat.setAdapter(adapterClassRepeat);
+        drawWeek(weekMonthYear);
 
     }
 
@@ -159,8 +160,10 @@ public class AddTasks extends AppCompatActivity {
             tmp.setGravity(Gravity.CENTER);
             daysId[i] = View.generateViewId();
             tmp.setId(daysId[i]);
+            tmp.setLayoutParams(lParams);
             tmp.getLayoutParams().height = tmp.getLayoutParams().MATCH_PARENT;
             tmp.getLayoutParams().width = tmp.getLayoutParams().WRAP_CONTENT;
+            tmp.setTextSize(20* getResources().getDisplayMetrics().density);
             tmp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
