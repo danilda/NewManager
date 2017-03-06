@@ -46,6 +46,7 @@ public class AddTasks extends AppCompatActivity {
     int[] daysId;
     LinearLayout weekMonthYear;
     LinearLayout repeatedLayout;
+    int classTask;
 
     public GregorianCalendar getStartTime() {
         if(startTime == null)
@@ -121,9 +122,21 @@ public class AddTasks extends AppCompatActivity {
         DialogFragment timeDialog;
         DialogFragment dateDialog;
         timeDialog = new TimePicker();
-        timeDialog.show(getSupportFragmentManager(), "timePicker");
-        dateDialog = new DatePicker();
-        dateDialog.show(getSupportFragmentManager(), "datePicker");
+        if(switcher()) {
+            timeDialog.show(getSupportFragmentManager(), "timePicker");
+            dateDialog = new DatePicker();
+            dateDialog.show(getSupportFragmentManager(), "datePicker");
+        } else {
+            timeDialog.show(getSupportFragmentManager(), "timePicker");
+        }
+    }
+
+    public boolean switcher(){
+        if(classTask == 1 || classTask == 4 || repeated.isChecked()){
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public void setDate(GregorianCalendar date, int year, int month, int day){
@@ -148,6 +161,7 @@ public class AddTasks extends AppCompatActivity {
         sb.append((int)time.get(Calendar.MINUTE)<10?"0" + time.get(Calendar.MINUTE):time.get(Calendar.MINUTE));
         ((TextView)findViewById(id)).setText(sb.toString());
     }
+
     public void weekDaysClick(View view){
         if(days == null){
             days = new HashMap<>();
@@ -173,6 +187,8 @@ public class AddTasks extends AppCompatActivity {
         }
     }
 
+
+    //draw methods
 
     public void drawWeek(LinearLayout view){
         daysId = new int[7];
@@ -213,15 +229,19 @@ public class AddTasks extends AppCompatActivity {
     }
 
 
+    //Listeners methods
+
     public AdapterView.OnItemClickListener classTaskListener(){
         return  new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                classTask = position;
                 switch (position){
                     case 0:
                         commonTaskChoise(false);
                         break;
                     case 1:
+                        birthday();
                         break;
                     case 2:
                         //purchases equal CommonTask
@@ -232,26 +252,14 @@ public class AddTasks extends AppCompatActivity {
                         commonTaskChoise(false);
                         break;
                     case 4:
+                        notificationTask();
                         break;
                 }
             }
         };
     }
 
-    public void commonTaskChoise(boolean a){
-        if(a){
-            repeatedLayout.setVisibility(View.INVISIBLE);
-            weekMonthYear.setVisibility(View.INVISIBLE);
-            startTimeHint.setText("Время");
-        } else {
-            repeated.setVisibility(View.VISIBLE);
-            repeated.setChecked(false);
-            notification.setVisibility(View.VISIBLE);
-            repeatedLayout.setVisibility(View.INVISIBLE);
-            weekMonthYear.setVisibility(View.INVISIBLE);
-            startTimeHint.setText("Дата и время");
-        }
-    }
+
 
     public CompoundButton.OnCheckedChangeListener repeatedListener(){
         return new CompoundButton.OnCheckedChangeListener() {
@@ -286,6 +294,43 @@ public class AddTasks extends AppCompatActivity {
                 }
             }
         };
+    }
+
+    public CompoundButton.OnCheckedChangeListener notificationListener(){
+        return new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        };
+    }
+
+
+    //Class of a task methods
+
+    public void commonTaskChoise(boolean a){
+        if(a){
+            repeatedLayout.setVisibility(View.INVISIBLE);
+            weekMonthYear.setVisibility(View.INVISIBLE);
+            startTimeHint.setText("Время");
+        } else {
+            repeated.setVisibility(View.VISIBLE);
+            repeated.setChecked(false);
+            notification.setVisibility(View.VISIBLE);
+            repeatedLayout.setVisibility(View.INVISIBLE);
+            weekMonthYear.setVisibility(View.INVISIBLE);
+            startTimeHint.setText("Дата и время");
+        }
+    }
+
+
+
+    public void birthday(){
+        repeated.setVisibility(View.INVISIBLE);
+    }
+
+    public void notificationTask(){
+        notification.setVisibility(View.INVISIBLE);
     }
 
 
