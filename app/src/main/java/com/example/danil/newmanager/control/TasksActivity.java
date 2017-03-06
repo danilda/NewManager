@@ -1,9 +1,10 @@
-package com.example.danil.newmanager;
+package com.example.danil.newmanager.control;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.danil.newmanager.R;
 
 public class TasksActivity extends Main {
 

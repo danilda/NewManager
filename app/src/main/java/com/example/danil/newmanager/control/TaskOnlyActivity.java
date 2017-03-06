@@ -1,7 +1,9 @@
-package com.example.danil.newmanager;
+package com.example.danil.newmanager.control;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.danil.newmanager.R;
 
 public class TaskOnlyActivity extends AppCompatActivity {
 

@@ -1,19 +1,16 @@
 package com.example.danil.newmanager.view.fragment;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.*;
-import android.widget.DatePicker;
 
-import com.example.danil.newmanager.AddTasks;
+import com.example.danil.newmanager.control.AddTasks;
 import com.example.danil.newmanager.R;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:isScrollContainer="true"
-    tools:context="com.example.danil.newmanager.AddTasks">
+    tools:context="com.example.danil.newmanager.control.AddTasks">
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
                     app:switchMinWidth="70dp"
                     android:layout_gravity="right"
                     android:layout_height="wrap_content"
-                    android:id="@+id/notifi"/>
+                    android:id="@+id/notification"/>
             </GridLayout>
             <GridLayout
                 android:layout_width="match_parent"
@@ -119,29 +119,31 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/repeated"/>
             </GridLayout>
-            <GridLayout
+            <LinearLayout
+                android:id="@+id/repeated_layout"
                 android:layout_width="match_parent"
                 android:layout_height="60dp">
                 <TextView
                     android:text="Тип"
-                    app:layout_widthPercent="40%"
                     android:layout_height="40dp"
                     android:textSize="20dp"
-                    android:id="@+id/class_task_repeat_hint" />
+                    android:id="@+id/class_task_repeat_hint"
+                    android:layout_width="wrap_content" />
                 <Spinner
-                    app:layout_widthPercent="100%"
                     android:textAlignment="center"
                     android:layout_height="40dp"
                     android:layout_gravity="right"
-                    android:id="@+id/task_class_repeat"></Spinner>
-            </GridLayout>
+                    android:id="@+id/task_class_repeat"
+                    android:layout_width="wrap_content"></Spinner>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:paddingLeft="10dp"
                 android:id="@+id/week_month_year"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:orientation="vertical">
             </LinearLayout>
 
 

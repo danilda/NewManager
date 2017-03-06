@@ -1,4 +1,4 @@
-package com.example.danil.newmanager;
+package com.example.danil.newmanager.control;
 
 /**
  * Created by danil on 10.02.2017.

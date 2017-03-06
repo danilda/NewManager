@@ -1,4 +1,4 @@
-package com.example.danil.newmanager;
+package com.example.danil.newmanager.control;
 
 
 
@@ -11,12 +11,15 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.danil.newmanager.R;
 import com.example.danil.newmanager.view.fragment.DatePicker;
 import com.example.danil.newmanager.view.fragment.TimePicker;
 
@@ -35,12 +38,14 @@ public class AddTasks extends AppCompatActivity {
     Spinner taskClassRepeat;
     SwitchCompat important;
     SwitchCompat repeated;
+    SwitchCompat notification ;
     TextView startTimeImg;
+    TextView startTimeHint;
     GregorianCalendar startTime;
     Map<Integer, Boolean> days;
     int[] daysId;
     LinearLayout weekMonthYear;
-
+    LinearLayout repeatedLayout;
 
     public GregorianCalendar getStartTime() {
         if(startTime == null)
@@ -56,6 +61,8 @@ public class AddTasks extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //init view elements
         setContentView(R.layout.activity_add_tasks);
         title = (EditText) findViewById(R.id.title);
         description = (EditText) findViewById(R.id.description);
@@ -63,21 +70,41 @@ public class AddTasks extends AppCompatActivity {
         taskClassRepeat = (Spinner) findViewById(R.id.task_class);
         important = (SwitchCompat) findViewById(R.id.important);
         repeated = (SwitchCompat) findViewById(R.id.repeated);
+        notification = (SwitchCompat)  findViewById(R.id.notification);
         startTimeImg = (TextView) findViewById(R.id.start_time_hint);
         weekMonthYear = (LinearLayout) findViewById(R.id.week_month_year);
+        repeatedLayout = (LinearLayout) findViewById(R.id.repeated_layout);
+        startTimeHint = (TextView) findViewById(R.id.start_time_hint);
 
+
+
+
+        //spinner for class type
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.tasks_class_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         taskClass.setAdapter(adapter);
 
 
-
+        //spinner for class repeated type
         ArrayAdapter<CharSequence> adapterClassRepeat = ArrayAdapter.createFromResource(this,
                 R.array.period_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         taskClassRepeat.setAdapter(adapterClassRepeat);
-        drawWeek(weekMonthYear);
+
+
+        //set visible params for view elements
+        commonTaskChoise(false);
+
+
+
+        //setting listeners
+        repeated.setOnCheckedChangeListener(repeatedListener());
+        taskClass.setOnItemClickListener(classTaskListener());
+        taskClassRepeat.setOnItemClickListener(repeatedClassListener());
+
+
+
 
     }
 
@@ -163,7 +190,7 @@ public class AddTasks extends AppCompatActivity {
             tmp.setLayoutParams(lParams);
             tmp.getLayoutParams().height = tmp.getLayoutParams().MATCH_PARENT;
             tmp.getLayoutParams().width = tmp.getLayoutParams().WRAP_CONTENT;
-            tmp.setTextSize(20* getResources().getDisplayMetrics().density);
+            tmp.setTextSize(15* getResources().getDisplayMetrics().density);
             tmp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -180,6 +207,85 @@ public class AddTasks extends AppCompatActivity {
 
     public void drawMonth(View view){
         
+    }
+    public void drawYear(View view){
+
+    }
+
+
+    public AdapterView.OnItemClickListener classTaskListener(){
+        return  new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        commonTaskChoise(false);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        //purchases equal CommonTask
+                        commonTaskChoise(false);
+                        break;
+                    case 3:
+                        //sport equal CommonTask
+                        commonTaskChoise(false);
+                        break;
+                    case 4:
+                        break;
+                }
+            }
+        };
+    }
+
+    public void commonTaskChoise(boolean a){
+        if(a){
+            repeatedLayout.setVisibility(View.INVISIBLE);
+            weekMonthYear.setVisibility(View.INVISIBLE);
+            startTimeHint.setText("Время");
+        } else {
+            repeated.setVisibility(View.VISIBLE);
+            repeated.setChecked(false);
+            notification.setVisibility(View.VISIBLE);
+            repeatedLayout.setVisibility(View.INVISIBLE);
+            weekMonthYear.setVisibility(View.INVISIBLE);
+            startTimeHint.setText("Дата и время");
+        }
+    }
+
+    public CompoundButton.OnCheckedChangeListener repeatedListener(){
+        return new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    weekMonthYear.removeAllViewsInLayout();
+                    drawWeek(weekMonthYear);
+                    commonTaskChoise(isChecked);
+                } else {
+                    commonTaskChoise(isChecked);
+                }
+            }
+        };
+    }
+
+    public AdapterView.OnItemClickListener repeatedClassListener(){
+        return  new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                weekMonthYear.removeAllViewsInLayout();
+                switch (position){
+                    case 0:
+                        drawWeek(weekMonthYear);
+                        break;
+                    case 1:
+                        drawMonth(weekMonthYear);
+                        break;
+                    case 2:
+                        drawYear(weekMonthYear);
+                        break;
+                }
+            }
+        };
     }
 
 

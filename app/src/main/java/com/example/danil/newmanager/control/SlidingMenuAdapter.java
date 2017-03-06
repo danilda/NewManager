@@ -1,4 +1,4 @@
-package com.example.danil.newmanager;
+package com.example.danil.newmanager.control;
 
 import android.content.Context;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import com.example.danil.newmanager.R;
+import com.example.danil.newmanager.control.ItemSlideMenu;
 
 import java.util.List;
 

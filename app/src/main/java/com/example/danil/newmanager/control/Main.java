@@ -1,4 +1,4 @@
-package com.example.danil.newmanager;
+package com.example.danil.newmanager.control;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,17 +12,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 
 
+import com.example.danil.newmanager.R;
 import com.example.danil.newmanager.model.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
