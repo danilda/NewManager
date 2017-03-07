@@ -90,7 +90,7 @@ public class AddTasks extends AppCompatActivity {
         //spinner for class repeated type
         ArrayAdapter<CharSequence> adapterClassRepeat = ArrayAdapter.createFromResource(this,
                 R.array.period_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterClassRepeat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         taskClassRepeat.setAdapter(adapterClassRepeat);
 
 
