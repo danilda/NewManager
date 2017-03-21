@@ -184,7 +184,7 @@ public class Main extends AppCompatActivity {
             map.put(ATTRIBUTE_NAME_ID_IMG, taskTmp.getImgID());
             map.put(ATTRIBUTE_NAME_TITLE, taskTmp.getTitle());
 //            map.put(ATTRIBUTE_NAME_DESCRIPTION, taskTmp.getDescription().substring(0, 200));
-            map.put(ATTRIBUTE_NAME_DATE, sdf.format(taskTmp.getNextTime().getTime()));
+            map.put(ATTRIBUTE_NAME_DATE, sdf.format(taskTmp.getTime().getTime()));
             data.add(map);
         }
         Log.d(logName, "data.size : " + data.size() );

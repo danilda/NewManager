@@ -25,13 +25,15 @@ public class MainActivity extends Main {
 //        nearTasks.addView();
 
         ArrayList<Task> arr = new ArrayList<>();
-        arr.add(new Task("Го бегать", "Хочу не быть жирным", new GregorianCalendar()));
-        arr.add(new Task("Го бегать", "Хочу не быть жирным", new GregorianCalendar()));
-        arr.add(new Task("Го бегать", "Хочу не быть жирным", new GregorianCalendar()));
-        arr.add(new Task("Го бегать", "Хочу не быть жирным", new GregorianCalendar()));
-        arr.add(new Task("Го бегать", "Хочу не быть жирным", new GregorianCalendar()));
-        arr.add(new Task("Го бегать", "Хочу не быть жирным", new GregorianCalendar()));
-        arr.add(new Task("Го бегать", "Хочу не быть жирным", new GregorianCalendar()));
+        arr.add(new Task("Го бегать", "Хочу не быть жирным", (byte) 1));
+        arr.add(new Task("Го бегать", "Хочу не быть жирным", (byte) 1));
+        arr.add(new Task("Го бегать", "Хочу не быть жирным", (byte) 1));
+        arr.add(new Task("Го бегать", "Хочу не быть жирным", (byte) 1));
+        arr.add(new Task("Го бегать", "Хочу не быть жирным", (byte) 1));
+        arr.add(new Task("Го бегать", "Хочу не быть жирным", (byte) 1));
+        arr.add(new Task("Го бегать", "Хочу не быть жирным", (byte) 1));
+        arr.add(new Task("Го бегать", "Хочу не быть жирным", (byte) 1));
+
         Log.d(logName, "arr size = " + arr.size());
 
         drawTasks((ListView) findViewById(R.id.soon_tasks), arr);

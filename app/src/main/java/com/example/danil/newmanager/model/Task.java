@@ -11,24 +11,76 @@ import java.util.GregorianCalendar;
  */
 
 public class Task implements Serializable {
-    // TODO добавить Активно/Неактивно
-    private int id;
+
+    private long id;
     private boolean active;
     private String title;
     private String description;
-    private String taskClass;
-    private boolean important;
-    private boolean repeated;
-    private GregorianCalendar startTime;
-    private GregorianCalendar endTime;
-    private int period;
-    private int imgID;
 
-    public int getId() {
+    /**
+     * 0 - common
+     * 1 - birthday
+     * 2 - purchases (покупки)
+     * 3 - sport
+     * 4 - notificationTask (будильник)
+     */
+    private byte taskClass;
+    private boolean important;
+    private boolean notification;
+    private boolean repeated;
+    private byte repeatedClass;
+    private String repeatedTime;
+    private GregorianCalendar time;
+
+    /**
+     * 10 - important
+     * 0 - common
+     * 1 - birthday
+     * 2 - purchases (покупки)
+     * 3 - sport
+     * 4 - notificationTask (будильник)
+     */
+    private byte imgID;
+
+
+    public Task(String title, String description, byte taskClass) {
+        this.title = title;
+        this.description = description;
+        this.taskClass = taskClass;
+        //временно
+        this.time = new GregorianCalendar();
+    }
+
+    public Task(int id, boolean active, String title, String description, byte taskClass, boolean important,
+                boolean notification, boolean repeated, byte repeatedClass, String repeatedTime, GregorianCalendar time, byte imgID) {
+        this.id = id;
+        this.active = active;
+        this.title = title;
+        this.description = description;
+        this.taskClass = taskClass;
+        this.important = important;
+        this.notification = notification;
+        this.repeated = repeated;
+        this.repeatedClass = repeatedClass;
+        this.repeatedTime = repeatedTime;
+        this.time = time;
+        if(imgID == -1){
+            if(important){
+                imgID = 10;
+            } else {
+                imgID = taskClass;
+            }
+        }else{
+            this.imgID = imgID;
+        }
+
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -56,12 +108,12 @@ public class Task implements Serializable {
         this.description = description;
     }
 
-    public String getTaskClass() {
+    public int getTaskClass() {
         return taskClass;
     }
 
-    public void setTaskClass(String task_class) {
-        this.taskClass = task_class;
+    public void setTaskClass(byte taskClass) {
+        this.taskClass = taskClass;
     }
 
     public boolean isImportant() {
@@ -72,6 +124,14 @@ public class Task implements Serializable {
         this.important = important;
     }
 
+    public boolean isNotification() {
+        return notification;
+    }
+
+    public void setNotification(boolean notification) {
+        this.notification = notification;
+    }
+
     public boolean isRepeated() {
         return repeated;
     }
@@ -80,92 +140,35 @@ public class Task implements Serializable {
         this.repeated = repeated;
     }
 
-    public GregorianCalendar getStartTime() {
-        return startTime;
+    public byte getRepeatedClass() {
+        return repeatedClass;
     }
 
-    public void setStartTime(GregorianCalendar startTime) {
-        this.startTime = startTime;
+    public void setRepeatedClass(byte repeatedClass) {
+        this.repeatedClass = repeatedClass;
     }
 
-    // TODO тут может быть ошибка
-    public void setStartTime(String startTime) {
-        SimpleDateFormat sdf = new SimpleDateFormat();
-        ParsePosition pos = new ParsePosition(0);
-        this.startTime = new GregorianCalendar();
-        this.startTime.setTime(sdf.parse(startTime, pos));
+    public String getRepeatedTime() {
+        return repeatedTime;
     }
 
-    public GregorianCalendar getEndTime() {
-        return endTime;
+    public void setRepeatedTime(String repeatedTime) {
+        this.repeatedTime = repeatedTime;
     }
 
-    public void setEndTime(GregorianCalendar endTime) {
-        this.endTime = endTime;
+    public GregorianCalendar getTime() {
+        return time;
     }
 
-    public int getPeriod() {
-        return period;
+    public void setTime(GregorianCalendar time) {
+        this.time = time;
     }
 
-    public void setPeriod(int period) {
-        this.period = period;
-    }
-
-    public int getImgID() {
+    public byte getImgID() {
         return imgID;
     }
 
-    public void setImgID(int imgID) {
+    public void setImgID(byte imgID) {
         this.imgID = imgID;
     }
-
-    public Task(int id, String title, String description, String task_class , boolean important, boolean repeated, GregorianCalendar startTime, GregorianCalendar endTime, int period, int imgID) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.taskClass = task_class;
-        this.important = important;
-        this.repeated = repeated;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.period = period;
-    }
-
-    public Task(String title, String discriptions, GregorianCalendar startTime) {
-        this.title = title;
-        this.description = discriptions;
-        this.startTime = startTime;
-    }
-
-    public Task(String title, String discriptions, boolean repeated, GregorianCalendar startTime, GregorianCalendar endTime, int period) {
-        this.title = title;
-        this.description = discriptions;
-        this.repeated = repeated;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.period = period;
-    }
-
-    /**
-     * IMPORTANT
-     * months start with 1!
-     * */
-    public GregorianCalendar getNextTime(){
-        if(!repeated){
-            return startTime;
-        } else {
-            GregorianCalendar tmp = startTime;
-            while(tmp.compareTo(endTime)< 1){
-                if(tmp.compareTo(new GregorianCalendar())>=0 ){
-                    break;
-                }
-                tmp.add(Calendar.HOUR , period);
-            }
-            return !(tmp.compareTo(endTime)< 1) ? null : tmp;
-        }
-
-    }
-
-
 }

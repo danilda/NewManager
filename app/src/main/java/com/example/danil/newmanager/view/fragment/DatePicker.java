@@ -63,5 +63,7 @@ public class DatePicker extends DialogFragment
                           int month, int day) {
         addTasks = (AddTasks) getActivity();
         addTasks.setDate(addTasks.getStartTime(), year, month, day);
+        if(addTasks.switcher() == 1)
+            addTasks.showDate(addTasks.getStartTime(), R.id.start_time_hint);
     }
 }
