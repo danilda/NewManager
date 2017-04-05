@@ -18,7 +18,11 @@ import android.widget.SimpleAdapter;
 
 
 import com.example.danil.newmanager.R;
+import com.example.danil.newmanager.model.DBActions;
 import com.example.danil.newmanager.model.Task;
+import com.example.danil.newmanager.model.TaskHelper;
+import com.example.danil.newmanager.view.fragment.ItemAdapter;
+import com.example.danil.newmanager.view.fragment.TaskItemContent;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,6 +70,10 @@ public class Main extends AppCompatActivity {
             setContentView(R.layout.activity_tasks);
             Log.d(logName, "TasksActivity начало! ");
         }
+
+        //init Repeated Map
+        TaskHelper.initRepeatedMap(this);
+
         Log.d(logName, "onCreate начало");
         listViewSliding = (ListView) findViewById(R.id.sliding_menu);
         Log.d(logName, "listViewSliding начало :" + listViewSliding );
@@ -171,38 +179,17 @@ public class Main extends AppCompatActivity {
     }
 
     public void drawTasks(ListView into, ArrayList<Task> input){
+        ArrayList<TaskItemContent> items = new ArrayList<>();
 
-        SimpleDateFormat sdf = new SimpleDateFormat();
-
-        ArrayList<Map<String, Object>> data = new ArrayList<>(input.size());
-        Map<String, Object> map;
-        Task taskTmp;
-        for(int i = 0 ; i < input.size(); i++){
-            map = new HashMap<>();
-            taskTmp = input.get(i);
-            //TODO добавить картинку вместо id
-            map.put(ATTRIBUTE_NAME_ID_IMG, taskTmp.getImgID());
-            map.put(ATTRIBUTE_NAME_TITLE, taskTmp.getTitle());
-//            map.put(ATTRIBUTE_NAME_DESCRIPTION, taskTmp.getDescription().substring(0, 200));
-            map.put(ATTRIBUTE_NAME_DATE, sdf.format(taskTmp.getTime().getTime()));
-            data.add(map);
+        for(Task i : input){
+            items.add(new TaskItemContent(i));
         }
-        Log.d(logName, "data.size : " + data.size() );
 
-        String[] from = { ATTRIBUTE_NAME_ID_IMG, ATTRIBUTE_NAME_TITLE,
-                /*ATTRIBUTE_NAME_DESCRIPTION,*/ ATTRIBUTE_NAME_DATE};
-        int[] to = { R.id.item_img, R.id.item_title, R.id.item_date};
-
-        // создаем адаптер
-        SimpleAdapter sAdapter = new SimpleAdapter(this, data, R.layout.task_item,
-                from, to);
-
-        // определяем список и присваиваем ему адаптер
+        ItemAdapter adapter = new ItemAdapter(this, items);
         ViewGroup.LayoutParams params = into.getLayoutParams();
-        params.height = (int)(90*data.size()* getResources().getDisplayMetrics().density);
+        params.height = (int)(90*items.size()* getResources().getDisplayMetrics().density);
         into.setLayoutParams(params);
-//        into.requestLayout();
-        into.setAdapter(sAdapter);
+        into.setAdapter(adapter);
 
     }
 
