@@ -6,15 +6,19 @@ import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.example.danil.newmanager.R;
+
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -136,6 +140,47 @@ public class TaskController extends AppCompatActivity {
         }
     }
 
+    public List<Integer> getNumberOfRepeate(){
+        List<Integer> tmp = new LinkedList<>();
+        Iterator iterator = days.keySet().iterator();
+        while (iterator.hasNext()){
+            int tmp2 = (Integer) iterator.next();
+            if(days.get(tmp2)){
+                tmp.add(getDaysIndex(tmp2));
+            }
+        }
+        return (tmp.size() != 0)?tmp:null;
+    }
 
+    private int getDaysIndex(int id){
+        for(int i = 0; i < 7; i++)
+            if(daysId[i] == id)
+                return i;
+        throw new IndexOutOfBoundsException("ID дня вне рамок ");
+    }
+
+    public GregorianCalendar getStartTime() {
+        if(startTime == null)
+            startTime = new GregorianCalendar();
+        return startTime;
+    }
+
+
+    public void setStartTime(GregorianCalendar startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setDate(GregorianCalendar date, int year, int month, int day){
+        date.set(Calendar.YEAR, year);
+        date.set(Calendar.MONTH, month);
+        date.set(Calendar.DAY_OF_MONTH, day);
+        startTime = date;
+    }
+
+    public void setTime(GregorianCalendar time, int hour, int min){
+        time.set(Calendar.HOUR_OF_DAY , hour);
+        time.set(Calendar.MINUTE , min);
+        startTime = time;
+    }
 
 }

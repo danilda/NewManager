@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.*;
 
+import com.example.danil.newmanager.control.ActionsTaskForDatePicker;
 import com.example.danil.newmanager.control.AddTasks;
 import com.example.danil.newmanager.R;
 
@@ -21,7 +22,7 @@ public class TimePicker extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener{
 
     GregorianCalendar time;
-    private AddTasks addTasks;
+    private ActionsTaskForDatePicker addTasks;
 
     public GregorianCalendar getTime() {
         return time;
@@ -51,8 +52,9 @@ public class TimePicker extends DialogFragment
 
     @Override
     public void onTimeSet(android.widget.TimePicker view, int hourOfDay, int minute) {
-        addTasks = (AddTasks) getActivity();
+        addTasks = (ActionsTaskForDatePicker) getActivity();
         addTasks.setTime(addTasks.getStartTime(), hourOfDay, minute);
-        addTasks.showDate(addTasks.getStartTime(), R.id.start_time_hint);
+        addTasks.showDate(addTasks.getStartTime(),
+                addTasks.getClass().equals("AddTasks")?R.id.start_time_hint:R.id.start_time_hint_update);
     }
 }

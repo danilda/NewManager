@@ -17,15 +17,16 @@ public class TaskItemContent {
     String title;
     String date;
     int img_id;
+    Task task;
 
     public TaskItemContent(Task i) {
-
+        task = i;
         SimpleDateFormat sdf = new SimpleDateFormat();
         title = i.getTitle();
         if(!i.isRepeated()){
             date = sdf.format(i.getTime().getTime());
         } else {
-            String[] allDays = {"Пт","Вт","Ср","Чт","Пт","Сб","Вс"};
+            String[] allDays = {"Пн","Вт","Ср","Чт","Пт","Сб","Вс"};
             date = "";
             String[] tmp = i.getRepeatedTime().replace("|", " ").split(" ");
             Log.d(LOG_NAME, "Array of string " + i.getRepeatedTime());
@@ -50,9 +51,6 @@ public class TaskItemContent {
             int mins = i.getTime().get(GregorianCalendar.MINUTE);
             int hours = i.getTime().get(GregorianCalendar.HOUR);
             date += " \n"+ (hours < 10? ("0")+hours : hours) + ":" + (mins < 10? ("0")+mins : mins);
-
-
-
         }
 
         img_id = TaskHelper.getImageById(i.getImgID());

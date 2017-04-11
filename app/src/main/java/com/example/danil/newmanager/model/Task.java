@@ -12,6 +12,9 @@ import java.util.GregorianCalendar;
 
 public class Task implements Serializable {
 
+    public static byte WEEK_REPEATED_CLASS = 0;
+    public static byte MONTH_REPEATED_CLASS = 1;
+    public static byte YEAR_REPEATED_CLASS = 2;
     private long id;
     private boolean active;
     private String title;

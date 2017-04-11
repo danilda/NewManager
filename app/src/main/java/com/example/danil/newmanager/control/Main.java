@@ -3,9 +3,11 @@ package com.example.danil.newmanager.control;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,11 +23,14 @@ import com.example.danil.newmanager.R;
 import com.example.danil.newmanager.model.DBActions;
 import com.example.danil.newmanager.model.Task;
 import com.example.danil.newmanager.model.TaskHelper;
+import com.example.danil.newmanager.view.fragment.DatePicker;
 import com.example.danil.newmanager.view.fragment.ItemAdapter;
 import com.example.danil.newmanager.view.fragment.TaskItemContent;
+import com.example.danil.newmanager.view.fragment.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -193,8 +198,19 @@ public class Main extends AppCompatActivity {
 
     }
 
+
+
+
+
     public void addTask() {
         Intent intent = new Intent(this, AddTasks.class);
         startActivity(intent);
     }
+    public void updateTask(Task currentTask) {
+        Intent intent = new Intent(this, UpdateTasks.class);
+        intent.putExtra("TaskId", currentTask.getId());
+        startActivity(intent);
+    }
+
+
 }

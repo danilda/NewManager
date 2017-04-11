@@ -85,6 +85,7 @@ public class DBActions {
     public ArrayList<Task> getListTasks() throws ParseException {
         if(allTasks == null)
             throw new RuntimeException("getListTasks возвращает null!");
+        checkForActive(false); // should be changed after creation settings
         return allTasks;
     }
 
@@ -179,5 +180,47 @@ public class DBActions {
                 return a;
         }
         return null;
+    }
+
+    public void updateTask(Task task){
+        ContentValues cv = new ContentValues();
+        cv.put("active", task.isActive()?1:0);
+        cv.put("title", task.getTitle());
+        cv.put("description", task.getDescription());
+        cv.put("class", task.getTaskClass());
+        cv.put("important", task.isImportant()?1:0);
+        cv.put("notification", task.isNotification()?1:0);
+        cv.put("repeated", task.isRepeated()?1:0);
+        cv.put("repeated_class", task.getRepeatedClass());
+        cv.put("repeated_time", task.getRepeatedTime());
+        cv.put("time", (new SimpleDateFormat()).format(task.getTime().getTime()));
+        cv.put("img_id", task.getImgID());
+        int updCount = db.update("TasksTable", cv, "id = ?",
+                new String[] {Long.toString(task.getId())});
+
+        Log.d(LOG_TAG, "updateTask rows were updated : "+ updCount);
+    }
+
+    public void deleteTask(Task task){
+        int delCount = db.delete("TasksTable", "id = " + task.getId(), null);
+        Log.d(LOG_TAG, "deleted rows count = " + delCount);
+    }
+
+    /**
+     * @param doDelete is temporarily "false", waiting for creation settings
+     */
+    public void checkForActive(boolean doDelete){
+        for(Task task : allTasks){
+            if(task.isRepeated()){
+                if(task.getTime().getTime().compareTo(new Date()) < 0 ) {
+                    if(doDelete){
+                        deleteTask(task);
+                    } else {
+                        task.setActive(false);
+                        updateTask(task);
+                    }
+                }
+            }
+        }
     }
 }

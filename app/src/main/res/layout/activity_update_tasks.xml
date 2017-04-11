@@ -5,10 +5,6 @@
     android:id="@+id/activity_update_tasks"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.danil.newmanager.control.UpdateTasks">
     <ScrollView
         android:layout_width="wrap_content"
@@ -41,7 +37,7 @@
                 android:ems="10"
                 android:textAlignment="textStart"
                 android:hint="до 50 символов"
-                android:id="@+id/title"
+                android:id="@+id/title_update"
                 android:textColor="#3e3ab7"
                 style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
                 android:inputType="textMultiLine" />
@@ -50,71 +46,71 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:id="@+id/description_hint" />
+                android:id="@+id/description_hint_update" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:ems="10"
-                android:id="@+id/description" />
+                android:id="@+id/description_update" />
 
             <GridLayout
                 android:layout_width="match_parent"
-                android:id="@+id/container_active"
+                android:id="@+id/container_active_update"
                 android:layout_height="60dp">
                 <TextView
                     android:text="Активна"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
-                    android:id="@+id/active_hint" />
+                    android:id="@+id/active_hint_update" />
                 <android.support.v7.widget.SwitchCompat
                     android:layout_width="70dp"
                     app:switchMinWidth="70dp"
                     android:layout_gravity="right"
                     android:layout_height="wrap_content"
-                    android:id="@+id/active"/>
+                    android:id="@+id/active_update"/>
             </GridLayout>
             <GridLayout
                 android:layout_width="match_parent"
-                android:id="@+id/container_important"
+                android:id="@+id/container_important_update"
                 android:layout_height="60dp">
                 <TextView
                     android:text="Важное"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
-                    android:id="@+id/important_hint" />
+                    android:id="@+id/important_hint_update" />
                 <android.support.v7.widget.SwitchCompat
                     android:layout_width="70dp"
                     app:switchMinWidth="70dp"
                     android:layout_gravity="right"
                     android:layout_height="wrap_content"
-                    android:id="@+id/important"/>
+                    android:id="@+id/important_update"/>
             </GridLayout>
             <GridLayout
                 android:layout_width="match_parent"
-                android:id="@+id/container_notification"
+                android:id="@+id/container_notification_update"
                 android:layout_height="60dp">
                 <TextView
                     android:text="Увидомление"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
-                    android:id="@+id/notifi_hint" />
+                    android:id="@+id/notifi_hint_update" />
                 <android.support.v7.widget.SwitchCompat
                     android:layout_width="70dp"
                     app:switchMinWidth="70dp"
                     android:layout_gravity="right"
                     android:layout_height="wrap_content"
-                    android:id="@+id/notification"/>
+                    android:id="@+id/notification_update"/>
             </GridLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:paddingLeft="10dp"
-                android:id="@+id/week_month_year"
+                android:id="@+id/week_month_year_update"
                 android:paddingRight="10dp"
                 android:orientation="horizontal">
             </LinearLayout>
@@ -122,7 +118,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:id="@+id/container_set_time"
+                android:id="@+id/container_set_time_update"
                 android:layout_height="44dp">
 
                 <TextView
@@ -130,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textSize="20dp"
-                    android:id="@+id/start_hint" />
+                    android:id="@+id/start_hint_update" />
 
                 <TextView
                     android:text="начала задачи"
@@ -142,7 +138,7 @@
                     android:layout_height="match_parent"
                     android:textSize="20dp"
                     android:gravity="end"
-                    android:id="@+id/start_time_hint" />
+                    android:id="@+id/start_time_hint_update" />
 
             </LinearLayout>
 
@@ -162,7 +158,7 @@
                         android:text="Сохранить"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/button_success"
+                        android:id="@+id/button_success_update"
                         android:background="#00b57b"
                         android:onClick="buttonSuccessful" />
                 </LinearLayout>
@@ -177,7 +173,7 @@
                         android:text="Отменить"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/button_miss"
+                        android:id="@+id/button_miss_update"
                         android:onClick="buttonCancel"
                         android:background="#dd2921" />
                 </LinearLayout>

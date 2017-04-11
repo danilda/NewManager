@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.Button;
 
-import com.example.danil.newmanager.control.AddTasks;
+import com.example.danil.newmanager.control.ActionsTaskForDatePicker;
 import com.example.danil.newmanager.R;
 
 import java.util.Calendar;
@@ -22,7 +22,7 @@ public class DatePicker extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
     private GregorianCalendar date;
-    private AddTasks addTasks;
+    private ActionsTaskForDatePicker addTasks;
 
     public GregorianCalendar getDate() {
         return date;
@@ -61,9 +61,10 @@ public class DatePicker extends DialogFragment
     @Override
     public void onDateSet(android.widget.DatePicker datePicker, int year,
                           int month, int day) {
-        addTasks = (AddTasks) getActivity();
+        addTasks = (ActionsTaskForDatePicker) getActivity();
         addTasks.setDate(addTasks.getStartTime(), year, month, day);
-        if(addTasks.switcher(addTasks.classTask, addTasks.repeated.isChecked()) == 1)
-            addTasks.showDate(addTasks.getStartTime(), R.id.start_time_hint);
+        if(addTasks.switcher(addTasks.getClassTask(), addTasks.isRepeated()) == 1)
+            addTasks.showDate(addTasks.getStartTime(),
+                    addTasks.getClass().equals("AddTasks")?R.id.start_time_hint:R.id.start_time_hint_update);
     }
 }

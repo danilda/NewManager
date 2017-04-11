@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.danil.newmanager.R;
+import com.example.danil.newmanager.control.Main;
+import com.example.danil.newmanager.model.Task;
 
 import java.util.ArrayList;
 
@@ -49,11 +51,17 @@ public class ItemAdapter extends BaseAdapter {
             view = lInflater.inflate(R.layout.task_item, parent, false);
         }
         TaskItemContent p = getTaskItem(position);
-
+        final Task currentTask = p.task;
         ((TextView) view.findViewById(R.id.item_title)).setText(p.title);
         ((TextView) view.findViewById(R.id.item_date)).setText(p.date);
         ((ImageView) view.findViewById(R.id.item_img)).setImageResource(p.img_id);
-
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ((Main)ctx).updateTask(currentTask);
+                return true;
+            }
+        });
         return view;
     }
     TaskItemContent getTaskItem(int position) {
