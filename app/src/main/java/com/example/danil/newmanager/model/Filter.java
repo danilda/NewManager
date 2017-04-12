@@ -3,7 +3,6 @@ package com.example.danil.newmanager.model;
 import android.content.Context;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
@@ -11,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by danil on 11.04.2017.
+ * dad
  */
 
 public class Filter {
@@ -80,15 +80,15 @@ public class Filter {
     private void weekRepeatedAdding(Task task, GregorianCalendar dayByCalendar, List<Task> tasksByNeededDay){
         String currentDayOfWeek = ARRAY_DAYS_OF_WEEK[dayByCalendar.get(GregorianCalendar.DAY_OF_WEEK) - 1];
         List<Integer> tasksIdsByNeededDay = TaskHelper.getRepeatedMap().get(currentDayOfWeek);
-        if(tasksIdsByNeededDay.contains(task))
+        if(tasksIdsByNeededDay.contains(Integer.valueOf(String.valueOf(task.getId()))))
             tasksByNeededDay.add(task);
     }
 
     private void monthRepeatedAdding(Task task, GregorianCalendar dayByCalendar, List<Task> tasksByNeededDay){
-
+        //todo will add this method
     }
 
     private void yearRepeatedAdding(Task task, GregorianCalendar dayByCalendar, List<Task> tasksByNeededDay){
-
+        //todo will add this method
     }
 }
