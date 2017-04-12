@@ -18,6 +18,8 @@ public class Filter {
     private List<Task> allTasks;
     private static Filter currentInstans;
 
+    private String[] ARRAY_DAYS_OF_WEEK = {TaskHelper.MONDAY, TaskHelper.TUESDAY, TaskHelper.WEDNESDAY, TaskHelper.THURSDAY, TaskHelper.FRIDAY, TaskHelper.SATURDAY, TaskHelper.SUNDAY };
+
     private Filter(Context context){
         try {
             allTasks = DBActions.getInstans(context).getListTasks();
@@ -38,12 +40,10 @@ public class Filter {
         List<Task> tasksByNeededDay = new LinkedList<>();
         for(Task task: allTasks){
             if(task.isRepeated()){
-                repeadedDayAdding(task, dayByCalendar, tasksByNeededDay);
+                repeatedDayAdding(task, dayByCalendar, tasksByNeededDay);
             } else {
-                unrepeadedDayAdding(task, dayByCalendar, tasksByNeededDay);
-
+                unrepeatedDayAdding(task, dayByCalendar, tasksByNeededDay);
             }
-
         }
         return null;
     }
@@ -62,23 +62,26 @@ public class Filter {
         return result;
     }
 
-    private void repeadedDayAdding(Task task, GregorianCalendar dayByCalendar, List<Task> tasksByNeededDay){
-        if(task.getRepeatedClass() == task.WEEK_REPEATED_CLASS)
+    private void repeatedDayAdding(Task task, GregorianCalendar dayByCalendar, List<Task> tasksByNeededDay){
+        if(task.getRepeatedClass() == Task.WEEK_REPEATED_CLASS)
             weekRepeatedAdding(task, dayByCalendar, tasksByNeededDay);
-        if(task.getRepeatedClass() == task.MONTH_REPEATED_CLASS)
+        if(task.getRepeatedClass() == Task.MONTH_REPEATED_CLASS)
             monthRepeatedAdding(task, dayByCalendar, tasksByNeededDay);
-        if(task.getRepeatedClass() == task.YEAR_REPEATED_CLASS)
+        if(task.getRepeatedClass() == Task.YEAR_REPEATED_CLASS)
             yearRepeatedAdding(task, dayByCalendar, tasksByNeededDay);
 
     }
 
-    private void unrepeadedDayAdding(Task task, GregorianCalendar dayByCalendar, List<Task> tasksByNeededDay){
+    private void unrepeatedDayAdding(Task task, GregorianCalendar dayByCalendar, List<Task> tasksByNeededDay){
         if(isDaysEquals(task.getTime(), dayByCalendar))
             tasksByNeededDay.add(task);
     }
 
     private void weekRepeatedAdding(Task task, GregorianCalendar dayByCalendar, List<Task> tasksByNeededDay){
-
+        String currentDayOfWeek = ARRAY_DAYS_OF_WEEK[dayByCalendar.get(GregorianCalendar.DAY_OF_WEEK) - 1];
+        List<Integer> tasksIdsByNeededDay = TaskHelper.getRepeatedMap().get(currentDayOfWeek);
+        if(tasksIdsByNeededDay.contains(task))
+            tasksByNeededDay.add(task);
     }
 
     private void monthRepeatedAdding(Task task, GregorianCalendar dayByCalendar, List<Task> tasksByNeededDay){

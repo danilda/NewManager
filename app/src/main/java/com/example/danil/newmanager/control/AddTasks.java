@@ -381,7 +381,7 @@ public class AddTasks extends TaskController implements ActionsTaskForDatePicker
             try {
                 TaskHelper.updateRepeadetMap(this, db.getListTasks());
             } catch (ParseException e){
-                Log.d(logName, "ParseException в апдейте");
+                Log.d(logName, "ParseException в добавление");
             }
             this.finish();
         } else {

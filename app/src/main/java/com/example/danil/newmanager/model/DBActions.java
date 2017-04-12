@@ -60,7 +60,6 @@ public class DBActions {
         long rowID = db.insert("TasksTable", null, cv);
         task.setId(rowID);
         Log.d(LOG_TAG, "row inserted, ID = " + rowID);
-
         return rowID;
     }
 

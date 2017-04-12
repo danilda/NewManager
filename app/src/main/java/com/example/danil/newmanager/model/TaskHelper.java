@@ -18,6 +18,13 @@ public class TaskHelper {
 
     private static final String LOG_NAME = "*--TaskHelper--*";
     private static final String SHARED_PEFERENCES = "H_P";
+    public static final String MONDAY = "a";
+    public static final String TUESDAY = "b";
+    public static final String WEDNESDAY = "c";
+    public static final String THURSDAY = "d";
+    public static final String FRIDAY = "e";
+    public static final String SATURDAY = "f";
+    public static final String SUNDAY = "g";
 
     private static SharedPreferences sPref;
 
@@ -177,4 +184,12 @@ public class TaskHelper {
         return map;
 
     }
+
+    public static Map<String, ArrayList<Integer>> getRepeatedMap(){
+        if(repeatedMap == null)
+            throw new NullPointerException("repeatedMap в TaskHelper еще не инициализирована");
+        return repeatedMap;
+    }
+
+
 }
