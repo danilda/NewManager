@@ -1,6 +1,10 @@
-package com.example.danil.newmanager.model;
+package com.example.danil.newmanager.model.Filters;
 
 import android.content.Context;
+
+import com.example.danil.newmanager.model.DBActions;
+import com.example.danil.newmanager.model.Task;
+import com.example.danil.newmanager.model.TaskHelper;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -13,14 +17,14 @@ import java.util.List;
  * dad
  */
 
-public class Filter {
+public class FilterByDay {
 
     private List<Task> allTasks;
-    private static Filter currentInstans;
+    private static FilterByDay currentInstance;
 
     private String[] ARRAY_DAYS_OF_WEEK = {TaskHelper.MONDAY, TaskHelper.TUESDAY, TaskHelper.WEDNESDAY, TaskHelper.THURSDAY, TaskHelper.FRIDAY, TaskHelper.SATURDAY, TaskHelper.SUNDAY };
 
-    private Filter(Context context){
+    private FilterByDay(Context context){
         try {
             allTasks = DBActions.getInstans(context).getListTasks();
         } catch (ParseException e) {
@@ -28,10 +32,28 @@ public class Filter {
         }
     }
 
-    public static Filter getInstans(Context context){
-        if(currentInstans == null)
-            currentInstans = new Filter(context);
-        return currentInstans;
+    public static FilterByDay getInstance(Context context){
+        if(currentInstance == null)
+            currentInstance = new FilterByDay(context);
+        return currentInstance;
+    }
+
+
+    public List<Task> getImportantTasks(){
+        List<Task> importantTasks = new LinkedList<>();
+        for(Task task: allTasks)
+            if(task.isImportant())
+                importantTasks.add(task);
+        return importantTasks;
+    }
+
+    public  List<Task> getTasksByClass(byte taskClass){
+        List<Task> tasksByClass = new LinkedList<>();
+        for(Task task: allTasks){
+            if(task.getTaskClass() == taskClass)
+                tasksByClass.add(task);
+        }
+        return tasksByClass;
     }
 
     public List<Task> getTasksByDay(Date day){
@@ -45,7 +67,7 @@ public class Filter {
                 unrepeatedDayAdding(task, dayByCalendar, tasksByNeededDay);
             }
         }
-        return null;
+        return tasksByNeededDay;
     }
 
     private boolean isDaysEquals(GregorianCalendar firstDay, GregorianCalendar secondDay){
@@ -91,4 +113,5 @@ public class Filter {
     private void yearRepeatedAdding(Task task, GregorianCalendar dayByCalendar, List<Task> tasksByNeededDay){
         //todo will add this method
     }
+
 }
