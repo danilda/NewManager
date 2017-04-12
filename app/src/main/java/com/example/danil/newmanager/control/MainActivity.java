@@ -60,7 +60,4 @@ public class MainActivity extends Main {
         return super.onCreateOptionsMenu(menu);
     }
 
-
-
-
 }

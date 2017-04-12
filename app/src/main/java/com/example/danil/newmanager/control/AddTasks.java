@@ -2,12 +2,17 @@ package com.example.danil.newmanager.control;
 
 
 
+
 import android.support.v4.app.DialogFragment;
+
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -31,11 +36,7 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+
 
 public class AddTasks extends TaskController implements ActionsTaskForDatePicker{
 
@@ -62,6 +63,7 @@ public class AddTasks extends TaskController implements ActionsTaskForDatePicker
 
         //init view elements
         setContentView(R.layout.activity_add_tasks);
+
         title = (EditText) findViewById(R.id.title);
         description = (EditText) findViewById(R.id.description);
         taskClass = (Spinner) findViewById(R.id.task_class);
@@ -92,12 +94,32 @@ public class AddTasks extends TaskController implements ActionsTaskForDatePicker
         //set visible params for view elements
         commonTaskChoise(false);
 
+        ActionBar actionBar = getSupportActionBar();
+        Log.d(logName, "actionBar = " + actionBar);
+
+//        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
         //setting listeners
         repeated.setOnCheckedChangeListener(repeatedListener());
         taskClass.setOnItemSelectedListener(classTaskListener());
         taskClassRepeat.setOnItemSelectedListener(repeatedClassListener());
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(logName, "onOptionsItemSelected id = " + item.toString());
+        Log.d(logName, "onOptionsItemSelected id = " + item.getIcon());
+        Log.d(logName, "onOptionsItemSelected id = " + item.getItemId());
+        Log.d(logName, "onOptionsItemSelected id = " + R.id.home);
+        Log.d(logName, "onOptionsItemSelected id = " + R.id.homeAsUp);
+        if(item.getItemId() == 16908332) // magic id
+            this.finish();
+        return super.onOptionsItemSelected(item);
+    }
+
 
     // TODO добавить класс задач будильник
     public boolean validation(){

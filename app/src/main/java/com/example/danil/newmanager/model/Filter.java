@@ -1,10 +1,6 @@
-package com.example.danil.newmanager.model.Filters;
+package com.example.danil.newmanager.model;
 
 import android.content.Context;
-
-import com.example.danil.newmanager.model.DBActions;
-import com.example.danil.newmanager.model.Task;
-import com.example.danil.newmanager.model.TaskHelper;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -17,14 +13,14 @@ import java.util.List;
  * dad
  */
 
-public class FilterByDay {
+public class Filter {
 
     private List<Task> allTasks;
-    private static FilterByDay currentInstance;
+    private static Filter currentInstance;
 
     private String[] ARRAY_DAYS_OF_WEEK = {TaskHelper.MONDAY, TaskHelper.TUESDAY, TaskHelper.WEDNESDAY, TaskHelper.THURSDAY, TaskHelper.FRIDAY, TaskHelper.SATURDAY, TaskHelper.SUNDAY };
 
-    private FilterByDay(Context context){
+    private Filter(Context context){
         try {
             allTasks = DBActions.getInstans(context).getListTasks();
         } catch (ParseException e) {
@@ -32,9 +28,9 @@ public class FilterByDay {
         }
     }
 
-    public static FilterByDay getInstance(Context context){
+    public static Filter getInstance(Context context){
         if(currentInstance == null)
-            currentInstance = new FilterByDay(context);
+            currentInstance = new Filter(context);
         return currentInstance;
     }
 
@@ -91,7 +87,6 @@ public class FilterByDay {
             monthRepeatedAdding(task, dayByCalendar, tasksByNeededDay);
         if(task.getRepeatedClass() == Task.YEAR_REPEATED_CLASS)
             yearRepeatedAdding(task, dayByCalendar, tasksByNeededDay);
-
     }
 
     private void unrepeatedDayAdding(Task task, GregorianCalendar dayByCalendar, List<Task> tasksByNeededDay){
