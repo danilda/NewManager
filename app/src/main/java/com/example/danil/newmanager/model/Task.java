@@ -1,10 +1,14 @@
 package com.example.danil.newmanager.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import static com.example.danil.newmanager.model.DBActions.LOG_TAG;
 
 /**
  * Created by danil on 19.02.2017.
@@ -178,5 +182,20 @@ public class Task implements Serializable {
 
     public void setImgID(byte imgID) {
         this.imgID = imgID;
+    }
+
+    public String toString(){
+        return          "ID = " + id +
+                        ", active = " + active +
+                        ", title = " + title +
+                        ", description = " + description+
+                        ", class = " + taskClass+
+                        ", important = " + important +
+                        ", notification = " + notification +
+                        ", repeated = " + repeated +
+                        ", repeatedClass = " + repeatedClass +
+                        ", repeatedTime = " + repeatedTime +
+                        ", time = " + new SimpleDateFormat().format(getTime().getTime()) +
+                        ", img_id = " + imgID;
     }
 }

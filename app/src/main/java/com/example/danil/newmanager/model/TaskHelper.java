@@ -6,9 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.danil.newmanager.R;
+
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,14 +30,6 @@ public class TaskHelper {
     public static final String SATURDAY = "f";
     public static final String SUNDAY = "g";
 
-    private static SharedPreferences sPref;
-
-    private static String[] allKeys= {"a", "b", "c", "d", "e", "f", "g", "1", "2", "3", "4",
-            "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
-            "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
-
-    public static final String ALL_RECORDS = "*";
-
     /**
      * a - Monday
      * b - Tuesday
@@ -45,7 +41,7 @@ public class TaskHelper {
      *
      * Number mean equal day of month
      */
-    private static Map<String, ArrayList<Integer>> repeatedMap ;
+    private static Map<String, List<Long>> repeatedMap ;
 
 
     public static String parseToRepeatedTime(byte timeType, List<Integer> list){
@@ -87,107 +83,40 @@ public class TaskHelper {
         return tmp;
     }
 
-    public static void initRepeatedMap(AppCompatActivity context){
+    public static void initRepeatedMap(List<Task> allTasks){
 //        repeatedMap
         Log.d(LOG_NAME, "initRepeatedMap - is start");
-        Map<String, String> tmp = getFromSharedPereferences(context, ALL_RECORDS);
-        if(tmp == null)
-            return;
         repeatedMap = new HashMap<>();
-        Set<String> set = tmp.keySet();
-        for(String a : set){
-            String valuesInString = tmp.get(a); // string with ids e.g [123|2313]
-            String[] arrStrings = valuesInString.split("|"); //array with ids e.g. [123],[2313]
-            ArrayList<Integer> ids;
-            if(arrStrings.length != 0) {
-                ids = new ArrayList<>();
-                for (String i : arrStrings) {
-                    ids.add(Integer.valueOf(i));
-                }
-                repeatedMap.put(a,ids);
+        for(Task task : allTasks){
+            if(task.isRepeated()){
+                putInRepeatedMap(task);
             }
         }
-
     }
 
-    public static void updateRepeadetMap(AppCompatActivity context, ArrayList<Task> list){
-        Log.d(LOG_NAME, "updateRepeadetMap - is start");
-        removeSharedPreferences(context);
-        Map<String, String> tmpMap = new HashMap<>();
-        for(Task i : list){
-            if(i.isRepeated()){
-                String[] y = i.getRepeatedTime().split("|");//e.g.{[a],[b]}
-                if(y.length > 0){
-                    for(int k = 0; k < y.length; k++)
-                        addInMap(y[k], Long.toString(i.getId()) ,tmpMap);
-                }
+    private static void putInRepeatedMap(Task task){
+        String repeatedDays = task.getRepeatedTime();
+        String[] daysByOneDay = repeatedDays.replace("|", " ").split(" "); // [a|e|f] ---> [a e f] ---> [a] [e] [f]
+        for(String day : daysByOneDay){
+            day = day.trim();
+            if(!day.equals("") && !day.equals("|")){
+                List<Long> valueOfNeededDay = repeatedMap.get(day);
+                if(valueOfNeededDay == null)
+                    valueOfNeededDay = new LinkedList<>();
+                valueOfNeededDay.add(task.getId());
+                Log.d(LOG_NAME, "putInRepeatedMap key " + day +" value list size " + valueOfNeededDay.size() + " current value " + task.getId() );
+                repeatedMap.put(day, valueOfNeededDay);
             }
         }
-        Set<String> set = tmpMap.keySet();
-        for(String keyTmp: set){
-            sPref = context.getPreferences(context.MODE_PRIVATE);
-            SharedPreferences.Editor ed = sPref.edit();
-            Log.d(LOG_NAME, "updateRepeadetMap - is SPref map : "+ keyTmp + " " + tmpMap.get(keyTmp));
-            ed.putString(keyTmp, tmpMap.get(keyTmp));
-            ed.commit();
+    }
+
+
+    public static Map<String, List<Long>> getRepeatedMap(Context context){
+        try {
+            initRepeatedMap(DBActions.getInstans(context).getListTasks());
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-
-    }
-
-    private static void removeSharedPreferences(AppCompatActivity context){
-        Log.d(LOG_NAME, "removeSharedPreferences - is start");
-        sPref = context.getPreferences(context.MODE_PRIVATE);
-        for(String i : allKeys)
-            sPref.edit().remove(i);
-    }
-
-    private static void addInMap(String key, String value, Map<String, String> map){
-        Log.d(LOG_NAME, "addInMap - is start");
-        String tmpVal = map.get(key);
-        if(tmpVal==null){
-            map.put(key,value);
-        } else {
-            tmpVal+= "|" + value;
-            map.put(key, tmpVal);
-            Log.d(LOG_NAME, "addInMap - is SPref map : "+ key + " " + tmpVal);
-        }
-
-    }
-    /**
-     * @param context
-     * @param key - if key == '*' - it's mean getting all records
-     * @return
-     */
-    private static Map<String, String> getFromSharedPereferences(AppCompatActivity context, String key) {
-        Log.d(LOG_NAME, "getFromSharedPereferences - is start");
-        sPref = context.getPreferences(context.MODE_PRIVATE);
-        Map<String, String> map = new HashMap<>();
-
-        String tmp;
-        if (key.equals(ALL_RECORDS)) {
-            for (String a : allKeys) {
-                tmp = sPref.getString(a, null);
-                if (tmp != null) {
-                    map.put(a, tmp);
-                }
-            }
-        } else {
-            tmp = sPref.getString(key, null);
-            if (tmp != null) {
-                map.put(key, tmp);
-            }
-        }
-        Log.d(LOG_NAME, "getFromSharedPereferences - end map.size = "+ map.size());
-        if(map.size() == 0)
-            return null;
-
-        return map;
-
-    }
-
-    public static Map<String, ArrayList<Integer>> getRepeatedMap(){
-        if(repeatedMap == null)
-            throw new NullPointerException("repeatedMap в TaskHelper еще не инициализирована");
         return repeatedMap;
     }
 

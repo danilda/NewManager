@@ -29,7 +29,7 @@ public class TaskItemContent {
             String[] allDays = {"Пн","Вт","Ср","Чт","Пт","Сб","Вс"};
             date = "";
             String[] tmp = i.getRepeatedTime().replace("|", " ").split(" ");
-            Log.d(LOG_NAME, "Array of string " + i.getRepeatedTime());
+            Log.d(LOG_NAME, "Array of string " + i.getRepeatedTime() );
             for (int y = 0; y < tmp.length; y++)
                 Log.d(LOG_NAME, "Array of string " + y + " " + tmp[y]);
 
@@ -49,7 +49,7 @@ public class TaskItemContent {
 
             }
             int mins = i.getTime().get(GregorianCalendar.MINUTE);
-            int hours = i.getTime().get(GregorianCalendar.HOUR);
+            int hours = i.getTime().get(GregorianCalendar.HOUR_OF_DAY);
             date += " \n"+ (hours < 10? ("0")+hours : hours) + ":" + (mins < 10? ("0")+mins : mins);
         }
 

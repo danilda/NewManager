@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.widget.*;
 
 import com.example.danil.newmanager.control.ActionsTaskForDatePicker;
@@ -55,6 +56,6 @@ public class TimePicker extends DialogFragment
         addTasks = (ActionsTaskForDatePicker) getActivity();
         addTasks.setTime(addTasks.getStartTime(), hourOfDay, minute);
         addTasks.showDate(addTasks.getStartTime(),
-                addTasks.getClass().equals("AddTasks")?R.id.start_time_hint:R.id.start_time_hint_update);
+                addTasks.getClass().equals(AddTasks.class)?R.id.start_time_hint:R.id.start_time_hint_update);
     }
 }

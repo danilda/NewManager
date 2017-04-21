@@ -10,10 +10,12 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.widget.Button;
 
 import com.example.danil.newmanager.control.ActionsTaskForDatePicker;
 import com.example.danil.newmanager.R;
+import com.example.danil.newmanager.control.AddTasks;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -65,6 +67,6 @@ public class DatePicker extends DialogFragment
         addTasks.setDate(addTasks.getStartTime(), year, month, day);
         if(addTasks.switcher(addTasks.getClassTask(), addTasks.isRepeated()) == 1)
             addTasks.showDate(addTasks.getStartTime(),
-                    addTasks.getClass().equals("AddTasks")?R.id.start_time_hint:R.id.start_time_hint_update);
+                    addTasks.getClass().equals(AddTasks.class)?R.id.start_time_hint:R.id.start_time_hint_update);
     }
 }

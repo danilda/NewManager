@@ -15,10 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".control.TasksActivity" />
+        <activity android:name=".control.RepeatedTasksActivity" />
         <activity android:name=".control.TaskOnlyActivity" />
         <activity android:name=".control.AddTasks" />
-        <activity android:name=".control.UpdateTasks"></activity>
+        <activity android:name=".control.UpdateTasks" />
+        <activity android:name=".control.BirthdayActivity"></activity>
     </application>
 
 </manifest>

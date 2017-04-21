@@ -82,9 +82,11 @@ public class DBActions {
     }
 
     public ArrayList<Task> getListTasks() throws ParseException {
+        allTasks = this.getAllTasks();
         if(allTasks == null)
             throw new RuntimeException("getListTasks возвращает null!");
-        checkForActive(false); // should be changed after creation settings
+
+        //checkForActive(false); // should be changed after creation settings
         return allTasks;
     }
 
@@ -117,7 +119,7 @@ public class DBActions {
         if(!repeated) {
             time.setTime((new SimpleDateFormat()).parse(stringTime));
         } else {
-
+            time.setTime((new SimpleDateFormat()).parse(stringTime));
         }
 
 

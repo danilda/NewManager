@@ -135,7 +135,7 @@ public class AddTasks extends TaskController implements ActionsTaskForDatePicker
             Toast.makeText(this, "Описание задачи слишком большое!", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(startTime.compareTo(new GregorianCalendar()) < 0){
+        if((startTime.compareTo(new GregorianCalendar()) < 0) && !repeated.isChecked()){
             Toast.makeText(this, "Некорректно указана дата или время!", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -400,11 +400,6 @@ public class AddTasks extends TaskController implements ActionsTaskForDatePicker
             task.setActive(true);
             DBActions db = DBActions.getInstans(this);
             db.insert(task);
-            try {
-                TaskHelper.updateRepeadetMap(this, db.getListTasks());
-            } catch (ParseException e){
-                Log.d(logName, "ParseException в добавление");
-            }
             this.finish();
         } else {
             Toast.makeText(this, "Невалидные значение параметров!", Toast.LENGTH_LONG).show();

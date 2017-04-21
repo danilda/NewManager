@@ -3,11 +3,11 @@ package com.example.danil.newmanager.control;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.support.v4.app.DialogFragment;
+
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,24 +16,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
-
-
 import com.example.danil.newmanager.R;
-import com.example.danil.newmanager.model.DBActions;
 import com.example.danil.newmanager.model.Task;
-import com.example.danil.newmanager.model.TaskHelper;
-import com.example.danil.newmanager.view.fragment.DatePicker;
 import com.example.danil.newmanager.view.fragment.ItemAdapter;
 import com.example.danil.newmanager.view.fragment.TaskItemContent;
-import com.example.danil.newmanager.view.fragment.TimePicker;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * Created by danil on 12.02.2017.
@@ -46,14 +35,18 @@ public class Main extends AppCompatActivity {
     final String ATTRIBUTE_NAME_DESCRIPTION = "description";
     final String ATTRIBUTE_NAME_DATE = "date";
 
-    private List<ItemSlideMenu> listSliding;
-    private SlidingMenuAdapter adapter;
-    private ListView listViewSliding;
-    private DrawerLayout drawerLayout;
-    private RelativeLayout mainContent;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
-    private static Class<?> layoutResID ;
 
+
+    protected List<ItemSlideMenu> listSliding;
+    protected SlidingMenuAdapter adapter;
+    protected ListView listViewSliding;
+    protected DrawerLayout drawerLayout;
+    protected RelativeLayout mainContent;
+    protected ActionBarDrawerToggle actionBarDrawerToggle;
+    protected static Class<?> layoutResID ;
+
+    protected ActionBar.Tab activeTab;
+    protected ActionBar.Tab unactiveTab;
 
     public static Class<?> getLayoutResID() {
         return layoutResID;
@@ -71,13 +64,11 @@ public class Main extends AppCompatActivity {
         if(layoutResID.equals(MainActivity.class)){
             setContentView(R.layout.activity_main);
             Log.d(logName, "MainActivity начало! ");
-        } else if(layoutResID.equals(TasksActivity.class)){
+        } else if(layoutResID.equals(RepeatedTasksActivity.class)){
             setContentView(R.layout.activity_tasks);
-            Log.d(logName, "TasksActivity начало! ");
+            Log.d(logName, "RepeatedTasksActivity начало! ");
         }
 
-        //init Repeated Map
-        TaskHelper.initRepeatedMap(this);
 
         Log.d(logName, "onCreate начало");
         listViewSliding = (ListView) findViewById(R.id.sliding_menu);
@@ -170,14 +161,14 @@ public class Main extends AppCompatActivity {
                     intent = new Intent(this, MainActivity.class);
                 break;
             case 1:
-                if(!Main.layoutResID.equals(TasksActivity.class))
-                    intent = new Intent(this, TasksActivity.class);
+                if(!Main.layoutResID.equals(RepeatedTasksActivity.class))
+                    intent = new Intent(this, RepeatedTasksActivity.class);
                 break;
             case 2:
-                intent = new Intent(this, TasksActivity.class);
+                intent = new Intent(this, RepeatedTasksActivity.class);
                 break;
             default:
-                intent = new Intent(this, TasksActivity.class);
+                intent = new Intent(this, RepeatedTasksActivity.class);
 
                 break;
         }
@@ -187,19 +178,17 @@ public class Main extends AppCompatActivity {
         }
     }
 
-    public void drawTasks(ListView into, ArrayList<Task> input){
+    public void drawTasks(ListView into, List<Task> input){
         ArrayList<TaskItemContent> items = new ArrayList<>();
-
         for(Task i : input){
             items.add(new TaskItemContent(i));
         }
-
         ItemAdapter adapter = new ItemAdapter(this, items);
         ViewGroup.LayoutParams params = into.getLayoutParams();
         params.height = (int)(90*items.size()* getResources().getDisplayMetrics().density);
         into.setLayoutParams(params);
         into.setAdapter(adapter);
-
+        into.setBackgroundColor(getResources().getColor(R.color.white));
     }
 
 

@@ -177,7 +177,7 @@ public class UpdateTasks extends TaskController implements ActionsTaskForDatePic
             Toast.makeText(this, "Описание задачи слишком большое!", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(startTime.compareTo(new GregorianCalendar()) < 0){
+        if(startTime.compareTo(new GregorianCalendar()) < 0 && !currentTask.isRepeated()){
             Toast.makeText(this, "Некорректно указана дата или время!", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -194,31 +194,19 @@ public class UpdateTasks extends TaskController implements ActionsTaskForDatePic
             currentTask.setDescription(description.getText().toString());
             currentTask.setImportant(important.isChecked());
             currentTask.setNotification(notification.isChecked());
-
-            if(currentTask.isRepeated()){
-                currentTask.setRepeatedClass(repeatedClass);
-                currentTask.setRepeatedTime(TaskHelper.parseToRepeatedTime(repeatedClass, getNumberOfRepeate()));
-
-            } else {
-                currentTask.setRepeatedClass((byte)-1);
-                currentTask.setRepeatedTime(null);
-            }
             currentTask.setTime(startTime);
-            currentTask.setActive(true);
+            currentTask.setActive(active.isChecked());
             DBActions db = DBActions.getInstans(this);
             db.updateTask(currentTask);
-            try {
-                TaskHelper.updateRepeadetMap(this, db.getListTasks());
-            } catch (ParseException e){
-                Log.d(LOG_NAME, "ParseException в апдейте");
-            }
             this.finish();
         } else {
             Toast.makeText(this, "Невалидные значение параметров!", Toast.LENGTH_LONG).show();
         }
     }
 
-    public void buttonCancel(View v){
+    public void buttonDelete(View v){
+        DBActions db = DBActions.getInstans(this);
+        db.deleteTask(currentTask);
         this.finish();
     }
 
