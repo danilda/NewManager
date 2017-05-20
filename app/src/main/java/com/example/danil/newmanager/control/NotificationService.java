@@ -53,7 +53,7 @@ public class NotificationService extends Service {
     public void onCreate(){
         super.onCreate();
         mTimer = new Timer();
-        mTimer.schedule(timerTask, 30*3600*1000, 3*3600*1000);
+        mTimer.schedule(timerTask, 600*1000, 600*1000);
 
     }
 

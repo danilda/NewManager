@@ -147,7 +147,11 @@ public class AddTasks extends TaskController implements ActionsTaskForDatePicker
             return false;
         }
 
-        if((classTask != Task.BIRTHDAY_CLASS && classTask != Task.PURCHASES_CLASS && startTime.compareTo(new GregorianCalendar()) < 0) && !repeated.isChecked()){
+//        if((classTask != Task.BIRTHDAY_CLASS && classTask != Task.PURCHASES_CLASS && startTime.compareTo(new GregorianCalendar()) < 0) && !repeated.isChecked()){
+//            Toast.makeText(this, "Некорректно указана дата или время!", Toast.LENGTH_LONG).show();
+//            return false;
+//        }
+        if( startTime.compareTo(new GregorianCalendar()) < 0 && !repeated.isChecked() && classTask == Task.COMMON_CLASS){
             Toast.makeText(this, "Некорректно указана дата или время!", Toast.LENGTH_LONG).show();
             return false;
         }
