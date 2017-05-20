@@ -1,33 +1,39 @@
 package com.example.danil.newmanager.control;
 
-import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.danil.newmanager.R;
 import com.example.danil.newmanager.model.Filter;
+import com.example.danil.newmanager.model.Task;
 
-public class RepeatedTasksActivity extends Main {
-
+public class PurchasesActivity extends Main {
 
     boolean isActive = true;
-    ListView repeatedTask;
-    private final static String LOG_NAME = "Tasks_Activity";
+    ListView purchasesTask;
+    private final static String LOG_NAME = "Birthday_Activity";
     Filter filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Main.setLayoutResID(RepeatedTasksActivity.class);
+        Main.setLayoutResID(PurchasesActivity.class);
+        setContentView(R.layout.activity_purchases);
         super.onCreate(savedInstanceState);
 
+
         filter = Filter.getInstance(this);
-        repeatedTask = (ListView) findViewById(R.id.repeated_task_list);
+        purchasesTask = (ListView) findViewById(R.id.sport_task_list);
 
         initTabs();
+    }
 
-        drawTasks(repeatedTask, filter.getTaskByRepeated(true, true) );
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        drawTasks(purchasesTask, filter.getTasksByClass(Task.PURCHASES_CLASS, isActive));
     }
 
     private ActionBar.TabListener getTabListener(final Filter filter ){
@@ -36,7 +42,7 @@ public class RepeatedTasksActivity extends Main {
             @Override
             public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
                 isActive = tab == activeTab;
-                drawTasks(repeatedTask, filter.getTaskByRepeated(true, isActive));
+                drawTasks(purchasesTask, filter.getTasksByClass(Task.PURCHASES_CLASS, isActive));
             }
 
             @Override
@@ -49,12 +55,6 @@ public class RepeatedTasksActivity extends Main {
 
             }
         };
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        drawTasks(repeatedTask, filter.getTaskByRepeated(true, isActive));
     }
 
     private void initTabs(){
@@ -70,6 +70,4 @@ public class RepeatedTasksActivity extends Main {
         unactiveTab.setTabListener(getTabListener(filter));
         bar.addTab(unactiveTab);
     }
-
-
 }

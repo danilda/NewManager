@@ -3,6 +3,7 @@ package com.example.danil.newmanager.control;
 
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -32,6 +33,7 @@ public class MainActivity extends Main {
     private MaterialCalendarView calendarView;
     private ScrollView scrollView;
     private ListView tasksContainer;
+    public final static String FILE_NAME = "filename";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,8 @@ public class MainActivity extends Main {
         scrollView.fullScroll(ScrollView.FOCUS_UP);
         scrollView.pageScroll(View.FOCUS_UP);
         scrollView.setVerticalScrollbarPosition(View.FOCUS_UP);
+
+        startService(new Intent(this, NotificationService.class));
 
     }
 

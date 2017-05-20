@@ -177,7 +177,7 @@ public class UpdateTasks extends TaskController implements ActionsTaskForDatePic
             Toast.makeText(this, "Описание задачи слишком большое!", Toast.LENGTH_LONG).show();
             return false;
         }
-        if(startTime.compareTo(new GregorianCalendar()) < 0 && !currentTask.isRepeated()){
+        if((classTask != Task.BIRTHDAY_CLASS && classTask != Task.PURCHASES_CLASS && startTime.compareTo(new GregorianCalendar()) < 0) && !repeated.isChecked()){
             Toast.makeText(this, "Некорректно указана дата или время!", Toast.LENGTH_LONG).show();
             return false;
         }

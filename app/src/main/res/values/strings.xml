@@ -7,12 +7,12 @@
         <item>День Рождения</item>
         <item>Покупки</item>
         <item>Спорт</item>
-        <item>Будильник</item>
+        <!--<item>Будильник</item>-->
     </string-array>
     <string-array name="period_array">
         <item>В рамках недели</item>
-        <item>В рамках месяца</item>
-        <item>В рамках года</item>
+        <!--<item>В рамках месяца</item>-->
+        <!--<item>В рамках года</item>-->
     </string-array>
     <string name="choose_date">Выберите дату</string>
     <string name="ready">Готово</string>

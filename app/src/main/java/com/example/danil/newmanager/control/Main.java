@@ -78,9 +78,12 @@ public class Main extends AppCompatActivity {
         mainContent = (RelativeLayout) findViewById(R.id.main_context);
         Log.d(logName, "mainContent начало :" + mainContent );
         listSliding = new ArrayList<>();
-        listSliding.add(new ItemSlideMenu(R.mipmap.ic_launcher, "Setting" ));
-        listSliding.add(new ItemSlideMenu(R.mipmap.ic_launcher, "About"));
-        listSliding.add(new ItemSlideMenu(R.mipmap.ic_launcher, "Android"));
+        listSliding.add(new ItemSlideMenu(R.drawable.calendar_1, "Дажборд" ));
+        listSliding.add(new ItemSlideMenu(R.drawable.img0, "Повторяющиеся задачи"));
+        listSliding.add(new ItemSlideMenu(R.drawable.gift_1, "День Рождения"));
+        listSliding.add(new ItemSlideMenu(R.drawable.online_purchase, "Покупки"));
+        listSliding.add(new ItemSlideMenu(R.drawable.weightlifting_1, "Спорт"));
+        listSliding.add(new ItemSlideMenu(R.drawable.inclined_bell, "Будильник"));
         adapter = new SlidingMenuAdapter(this, listSliding);
         listViewSliding.setAdapter(adapter);
 
@@ -165,10 +168,23 @@ public class Main extends AppCompatActivity {
                     intent = new Intent(this, RepeatedTasksActivity.class);
                 break;
             case 2:
-                intent = new Intent(this, RepeatedTasksActivity.class);
+                if(!Main.layoutResID.equals(BirthdayActivity.class))
+                intent = new Intent(this, BirthdayActivity.class);
+                break;
+            case 3:
+                if(!Main.layoutResID.equals(PurchasesActivity.class))
+                intent = new Intent(this, PurchasesActivity.class);
+                break;
+            case 4:
+                if(!Main.layoutResID.equals(SportActivity.class))
+                intent = new Intent(this, SportActivity.class);
+                break;
+            case 5:
+                if(!Main.layoutResID.equals(NotificationActivity.class))
+                intent = new Intent(this, NotificationActivity.class);
                 break;
             default:
-                intent = new Intent(this, RepeatedTasksActivity.class);
+
 
                 break;
         }

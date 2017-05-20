@@ -3,8 +3,15 @@ package com.example.danil.newmanager.control;
 
 
 
-import android.support.v4.app.DialogFragment;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +49,7 @@ public class AddTasks extends TaskController implements ActionsTaskForDatePicker
 
     private final static String logName = "log_add_task";
     public byte classTask;
+
 
     public byte getClassTask() {
         return classTask;
@@ -106,6 +114,9 @@ public class AddTasks extends TaskController implements ActionsTaskForDatePicker
         taskClass.setOnItemSelectedListener(classTaskListener());
         taskClassRepeat.setOnItemSelectedListener(repeatedClassListener());
 
+
+
+
     }
 
     @Override
@@ -135,7 +146,8 @@ public class AddTasks extends TaskController implements ActionsTaskForDatePicker
             Toast.makeText(this, "Описание задачи слишком большое!", Toast.LENGTH_LONG).show();
             return false;
         }
-        if((startTime.compareTo(new GregorianCalendar()) < 0) && !repeated.isChecked()){
+
+        if((classTask != Task.BIRTHDAY_CLASS && classTask != Task.PURCHASES_CLASS && startTime.compareTo(new GregorianCalendar()) < 0) && !repeated.isChecked()){
             Toast.makeText(this, "Некорректно указана дата или время!", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -382,16 +394,17 @@ public class AddTasks extends TaskController implements ActionsTaskForDatePicker
             Task task = new Task(title.getText().toString(), description.getText().toString(), classTask);
             task.setImportant(important.isChecked());
             task.setNotification(notification.isChecked());
-            if(classTask == 4 ) {
+            if(classTask == Task.PURCHASES_CLASS ) {
+                startTime = new GregorianCalendar();
+            }
+            if(classTask == Task.NOTIFICATION_CLASS ) {
                 task.setNotification(true);
             }
             task.setRepeated(repeated.isChecked());
             if(repeated.isChecked()){
                 task.setRepeatedClass(repeatedClass);
                 task.setRepeatedTime(TaskHelper.parseToRepeatedTime(repeatedClass, getNumberOfRepeate()));
-
                 //update SharedPreferences with repeated list
-
             } else {
                 task.setRepeatedClass((byte)-1);
                 task.setRepeatedTime(null);
@@ -409,8 +422,6 @@ public class AddTasks extends TaskController implements ActionsTaskForDatePicker
     public void buttonCancel(View v){
         this.finish();
     }
-
-
 
 
 }

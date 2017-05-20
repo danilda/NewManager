@@ -74,10 +74,29 @@ public class TaskHelper {
         Log.d(LOG_NAME, "getImageById - is start");
         int tmp = -1;
         //!!!!!!!!!!!!!!
-        a = 0;
+//        a = 0;
+
         //!!!!!!!!!!!!!!
         switch (a){
             case 0:
+                tmp = R.drawable.calendar_1;
+                break;
+            case 1:
+                tmp = R.drawable.gift_1;
+                break;
+            case 2:
+                tmp = R.drawable.online_purchase;
+                break;
+            case 3:
+                tmp = R.drawable.weightlifting_1;
+                break;
+            case 4:
+                tmp = R.drawable.inclined_bell;
+                break;
+            case 10:
+                tmp = R.drawable.exclamation_mark;
+                break;
+            default:
                 tmp = R.drawable.img0;
         }
         return tmp;

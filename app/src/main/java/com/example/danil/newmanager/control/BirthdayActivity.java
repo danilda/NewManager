@@ -13,22 +13,28 @@ import com.example.danil.newmanager.model.Task;
 public class BirthdayActivity extends Main{
 
     boolean isActive = true;
-    ListView repeatedTask;
+    ListView birthdayTask;
     private final static String LOG_NAME = "Birthday_Activity";
     Filter filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        Main.setLayoutResID(BirthdayActivity.class);
         setContentView(R.layout.activity_birthday);
+        super.onCreate(savedInstanceState);
+
+
+        filter = Filter.getInstance(this);
+        birthdayTask = (ListView) findViewById(R.id.birthday_task_list);
+
+        initTabs();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        drawTasks(repeatedTask, filter.getTaskByRepeated(true, isActive));
-
-        initTabs();
+        drawTasks(birthdayTask, filter.getTasksByClass(Task.BIRTHDAY_CLASS, isActive));
     }
 
     private ActionBar.TabListener getTabListener(final Filter filter ){
@@ -37,7 +43,7 @@ public class BirthdayActivity extends Main{
             @Override
             public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
                 isActive = tab == activeTab;
-                drawTasks(repeatedTask, filter.getTasksByClass(Task.BIRTHDAY_CLASS, isActive));
+                drawTasks(birthdayTask, filter.getTasksByClass(Task.BIRTHDAY_CLASS, isActive));
             }
 
             @Override

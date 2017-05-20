@@ -59,7 +59,6 @@ public class Task implements Serializable {
         this.title = title;
         this.description = description;
         this.taskClass = taskClass;
-        //временно
         this.time = new GregorianCalendar();
     }
 
@@ -78,9 +77,9 @@ public class Task implements Serializable {
         this.time = time;
         if(imgID == -1){
             if(important){
-                imgID = 10;
+                this.imgID = 10;
             } else {
-                imgID = taskClass;
+                this.imgID = taskClass;
             }
         }else{
             this.imgID = imgID;
@@ -133,6 +132,8 @@ public class Task implements Serializable {
     }
 
     public void setImportant(boolean important) {
+        if(important)
+            this.imgID = 10;
         this.important = important;
     }
 
